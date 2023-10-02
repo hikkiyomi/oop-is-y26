@@ -1,14 +1,18 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine.FuelConsumption;
+using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
 public class Engine : IFuelConsuming
 {
     private readonly IConsumptionFunction _consumption;
+    private Fuel _fuel;
 
-    public Engine(EngineType engineType)
+    public Engine(EngineType engineType, Fuel startingFuelCapacity)
     {
+        _fuel = startingFuelCapacity;
+
         _consumption = engineType switch
         {
             EngineType.ImpulseC => new ConstantConsumption(),
@@ -20,18 +24,16 @@ public class Engine : IFuelConsuming
         };
     }
 
-    public int Fuel { get; private set; }
-
     public bool TryConsumeFuel(int timePassed)
     {
-        int fuelNeeded = _consumption.CalculateFuelConsumption(timePassed);
+        Fuel fuelNeeded = _consumption.CalculateFuelConsumption(timePassed);
 
-        if (Fuel < fuelNeeded)
+        if (_fuel.Value < fuelNeeded.Value)
         {
             return false;
         }
 
-        Fuel -= fuelNeeded;
+        _fuel -= fuelNeeded;
 
         return true;
     }

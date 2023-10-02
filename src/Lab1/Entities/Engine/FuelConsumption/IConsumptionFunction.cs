@@ -1,6 +1,8 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Models;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine.FuelConsumption;
 
 public interface IConsumptionFunction
 {
-    int CalculateFuelConsumption(int time);
+    Fuel CalculateFuelConsumption(int time);
 }
