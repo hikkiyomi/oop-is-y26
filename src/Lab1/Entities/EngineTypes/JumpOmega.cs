@@ -1,8 +1,9 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine.FuelConsumption;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineTypes;
 
-public class LogarithmicConsumption : IConsumptionFunction
+[JumpEngine]
+public class JumpOmega : IEngineType
 {
     public Fuel CalculateFuelConsumption(int time)
     {

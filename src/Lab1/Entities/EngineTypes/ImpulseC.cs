@@ -1,8 +1,9 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine.FuelConsumption;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineTypes;
 
-public class ConstantConsumption : IConsumptionFunction
+[ImpulseEngine]
+public class ImpulseC : IEngineType
 {
     private const int FuelConsumption = 5;
 
