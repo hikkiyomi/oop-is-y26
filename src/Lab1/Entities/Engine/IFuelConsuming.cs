@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
 public interface IFuelConsuming
 {

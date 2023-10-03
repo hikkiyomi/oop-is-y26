@@ -16,7 +16,7 @@ public class Fuel : IConsumable
         Value = value;
     }
 
-    public int Value { get; set; }
+    public int Value { get; }
 
     public static Fuel operator -(Fuel? left, Fuel? right)
     {
@@ -34,9 +34,7 @@ public class Fuel : IConsumable
                 "Missing mandatory right parameter while subtracting fuel");
         }
 
-        int value = left.Value - right.Value;
-
-        return new Fuel(value);
+        return new Fuel(left.Value - right.Value);
     }
 
     public static Fuel Subtract(Fuel left, Fuel right)
