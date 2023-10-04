@@ -1,4 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineTypes;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineCharacteristics;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;

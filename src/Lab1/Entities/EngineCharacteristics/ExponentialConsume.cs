@@ -1,12 +1,10 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineTypes;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineCharacteristics;
 
-[ImpulseEngine]
 public class ExponentialConsume : IFuelConsumptionFunction
 {
-    public Fuel CalculateFuelConsumption(int time)
-    {
-        return new Fuel(int.Log2(time));
-    }
+    public EngineType Type => EngineType.Impulse;
+
+    public Fuel CalculateFuelConsumption(int time) => new Fuel(int.Log2(time));
 }

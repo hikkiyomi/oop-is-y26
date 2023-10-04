@@ -1,12 +1,10 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineTypes;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineCharacteristics;
 
-[JumpEngine]
 public class QuadraticConsume : IFuelConsumptionFunction
 {
-    public Fuel CalculateFuelConsumption(int time)
-    {
-        return new Fuel(time * time);
-    }
+    public EngineType Type => EngineType.Jump;
+
+    public Fuel CalculateFuelConsumption(int time) => new Fuel(time * time);
 }

@@ -2,5 +2,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 public interface IConsumable
 {
-    public int Value { get; }
+    int Value { get; }
 }
