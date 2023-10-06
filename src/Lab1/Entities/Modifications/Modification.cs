@@ -1,9 +1,9 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 
-public abstract class Modification : IDamageable
+public abstract class Modification : IBreakable
 {
     protected Modification(int health)
     {
@@ -11,6 +11,7 @@ public abstract class Modification : IDamageable
     }
 
     public HealthPoints Health { get; protected set; }
+    public bool IsBroken => Health.Value == 0;
 
-    public abstract void TakeDamage();
+    public abstract TravelResult TakeHit(DamageInfo damageInfo);
 }

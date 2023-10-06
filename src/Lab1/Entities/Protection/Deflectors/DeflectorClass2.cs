@@ -1,19 +1,24 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 
 public class DeflectorClass2 : Deflector
 {
-    private const int DefaultHealth = 3000;
+    private const int DefaultHealth = 6000;
 
     public DeflectorClass2(DeflectorModification? deflectorModification)
-        : base(new HealthPoints(DefaultHealth), deflectorModification)
+        : base(
+            new HealthPoints(DefaultHealth),
+            deflectorModification,
+            new ReadOnlyDictionary<DamageSource, double>(new Dictionary<DamageSource, double>()
+            {
+                { DamageSource.Asteroid, 1.0 },
+                { DamageSource.Meteorite, 5.0 / 3 },
+            }))
     {
-    }
-
-    public override void TakeDamage()
-    {
-        throw new System.NotImplementedException();
     }
 }
