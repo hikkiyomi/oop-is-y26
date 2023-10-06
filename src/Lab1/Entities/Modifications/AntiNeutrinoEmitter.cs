@@ -1,6 +1,6 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 
-public class AntiNeutrinoEmitter : DeflectorModification
+public class AntiNeutrinoEmitter : ShipModification
 {
     private const int DefaultHealth = 1;
 

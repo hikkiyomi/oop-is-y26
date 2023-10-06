@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;

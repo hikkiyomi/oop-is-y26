@@ -1,5 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated.EngineCharacteristics;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Armors;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
@@ -10,7 +11,7 @@ public class Augur : Spaceship
 {
     public Augur(DeflectorModification? deflectorModification)
         : base(
-            new[]
+            engines: new[]
             {
                 new Engine(
                     new ExponentialConsume(),
@@ -21,8 +22,9 @@ public class Augur : Spaceship
                     new Fuel(10),
                     EngineType.Jump),
             },
-            new DeflectorClass3(deflectorModification),
-            new ArmorClass3())
+            deflector: new DeflectorClass3(deflectorModification),
+            armor: new ArmorClass3(),
+            shipModification: null)
     {
     }
 }

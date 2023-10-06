@@ -9,15 +9,16 @@ public class Shuttle : Spaceship
 {
     public Shuttle()
         : base(
-            new[]
+            engines: new[]
             {
                 new Engine(
                     new ConstantConsume(),
                     new Fuel(10),
                     EngineType.Impulse),
             },
-            null,
-            new ArmorClass1())
+            deflector: null,
+            armor: new ArmorClass1(),
+            shipModification: null)
     {
     }
 }

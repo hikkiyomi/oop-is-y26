@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 
 public class PhotonDeflector : DeflectorModification
 {

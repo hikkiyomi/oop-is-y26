@@ -1,5 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated.EngineCharacteristics;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Armors;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
@@ -10,7 +11,7 @@ public class Stella : Spaceship
 {
     public Stella(DeflectorModification? deflectorModification)
         : base(
-            new[]
+            engines: new[]
             {
                 new Engine(
                     new ConstantConsume(),
@@ -21,8 +22,9 @@ public class Stella : Spaceship
                     new Fuel(10),
                     EngineType.Jump),
             },
-            new DeflectorClass1(deflectorModification),
-            new ArmorClass1())
+            deflector: new DeflectorClass1(deflectorModification),
+            armor: new ArmorClass1(),
+            shipModification: null)
     {
     }
 }

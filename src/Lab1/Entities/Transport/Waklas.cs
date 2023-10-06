@@ -10,7 +10,7 @@ public class Waklas : Spaceship
 {
     public Waklas()
         : base(
-            new[]
+            engines: new[]
             {
                 new Engine(
                     new ExponentialConsume(),
@@ -21,8 +21,9 @@ public class Waklas : Spaceship
                     new Fuel(10),
                     EngineType.Jump),
             },
-            new DeflectorClass1(null),
-            new ArmorClass1())
+            deflector: new DeflectorClass1(null),
+            armor: new ArmorClass2(),
+            shipModification: null)
     {
     }
 }
