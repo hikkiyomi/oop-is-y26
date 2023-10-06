@@ -6,10 +6,10 @@ public class HealthPoints : IConsumable
 {
     public HealthPoints(int value)
     {
-        if (value <= 0)
+        if (value < 0)
         {
             throw new ArgumentException(
-                "Health value cannot be negative or zero",
+                "Health value cannot be negative",
                 nameof(value));
         }
 
@@ -24,14 +24,14 @@ public class HealthPoints : IConsumable
         {
             throw new ArgumentNullException(
                 nameof(left),
-                "Missing mandatory left parameter while subtracting fuel");
+                "Missing mandatory left parameter while subtracting health");
         }
 
         if (right is null)
         {
             throw new ArgumentNullException(
                 nameof(right),
-                "Missing mandatory right parameter while subtracting fuel");
+                "Missing mandatory right parameter while subtracting health");
         }
 
         return new HealthPoints(left.Value - right.Value);

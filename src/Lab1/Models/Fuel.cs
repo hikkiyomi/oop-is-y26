@@ -6,10 +6,10 @@ public class Fuel : IConsumable
 {
     public Fuel(int value)
     {
-        if (value <= 0)
+        if (value < 0)
         {
             throw new ArgumentException(
-                "Fuel value cannot be negative or zero",
+                "Fuel value cannot be negative",
                 nameof(value));
         }
 
