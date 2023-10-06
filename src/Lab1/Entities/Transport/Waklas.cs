@@ -4,11 +4,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Armors;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Spaceships;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Transport;
 
-public class Meridian : Spaceship
+public class Waklas : Spaceship
 {
-    public Meridian()
+    public Waklas()
         : base(
             new[]
             {
@@ -16,9 +16,13 @@ public class Meridian : Spaceship
                     new ExponentialConsume(),
                     new Fuel(10),
                     EngineType.Impulse),
+                new Engine(
+                    new QuadraticConsume(),
+                    new Fuel(10),
+                    EngineType.Jump),
             },
-            DeflectorMaker.Create<DeflectorClass2>(new AntiNeutrinoEmitter()),
-            new ArmorClass2())
+            new DeflectorClass1(null),
+            new ArmorClass1())
     {
     }
 }

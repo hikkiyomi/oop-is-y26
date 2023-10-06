@@ -4,11 +4,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Armors;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Spaceships;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Transport;
 
-public class Waklas : Spaceship
+public class Augur : Spaceship
 {
-    public Waklas()
+    public Augur(DeflectorModification? deflectorModification)
         : base(
             new[]
             {
@@ -17,12 +17,12 @@ public class Waklas : Spaceship
                     new Fuel(10),
                     EngineType.Impulse),
                 new Engine(
-                    new QuadraticConsume(),
+                    new LinearConsume(),
                     new Fuel(10),
                     EngineType.Jump),
             },
-            DeflectorMaker.Create<DeflectorClass1>(null),
-            new ArmorClass1())
+            new DeflectorClass3(deflectorModification),
+            new ArmorClass3())
     {
     }
 }

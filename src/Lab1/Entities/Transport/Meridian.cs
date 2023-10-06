@@ -4,11 +4,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Armors;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Spaceships;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Transport;
 
-public class Augur : Spaceship
+public class Meridian : Spaceship
 {
-    public Augur(DeflectorModification? deflectorModification)
+    public Meridian()
         : base(
             new[]
             {
@@ -16,13 +16,9 @@ public class Augur : Spaceship
                     new ExponentialConsume(),
                     new Fuel(10),
                     EngineType.Impulse),
-                new Engine(
-                    new LinearConsume(),
-                    new Fuel(10),
-                    EngineType.Jump),
             },
-            DeflectorMaker.Create<DeflectorClass3>(deflectorModification),
-            new ArmorClass3())
+            new DeflectorClass2(new AntiNeutrinoEmitter()),
+            new ArmorClass2())
     {
     }
 }

@@ -4,9 +4,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 
 public abstract class Deflector : IDamageable
 {
-    public abstract HealthPoints Health { get; }
-    public abstract DeflectorModification? Modification { get; }
+    protected Deflector(HealthPoints health, DeflectorModification? deflectorModification)
+    {
+        Health = health;
+        Modification = deflectorModification;
+    }
 
-    public abstract Deflector Create(DeflectorModification? modification);
+    public HealthPoints Health { get; }
+    public DeflectorModification? Modification { get; }
+
     public abstract void TakeDamage();
 }

@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated.EngineCharacter
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Armors;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Spaceships;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Transport;
 
 public class Shuttle : Spaceship
 {

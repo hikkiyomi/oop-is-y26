@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Armors;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Spaceships;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Transport;
 
 public class Stella : Spaceship
 {
@@ -21,7 +21,7 @@ public class Stella : Spaceship
                     new Fuel(10),
                     EngineType.Jump),
             },
-            DeflectorMaker.Create<DeflectorClass1>(deflectorModification),
+            new DeflectorClass1(deflectorModification),
             new ArmorClass1())
     {
     }
