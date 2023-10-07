@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
@@ -13,5 +14,5 @@ public abstract class Modification : IBreakable
     public HealthPoints Health { get; protected set; }
     public bool IsBroken => Health.Value == 0;
 
-    public abstract TravelResult TakeHit(DamageInfo damageInfo);
+    public abstract DamageResult TakeHit(DamageInfo damageInfo);
 }

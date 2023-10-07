@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
 
@@ -12,10 +13,10 @@ public class AntiNeutrinoEmitter : ShipModification
     {
     }
 
-    public override TravelResult TakeHit(DamageInfo damageInfo)
+    public override DamageResult TakeHit(DamageInfo damageInfo)
     {
         return damageInfo.DamageSource is DamageSource.CosmoWhale
-            ? new TravelResult.Success()
+            ? new DamageResult.Success()
             : throw new DamageInfoException(
                 "Unknown damage source for critical hit");
     }

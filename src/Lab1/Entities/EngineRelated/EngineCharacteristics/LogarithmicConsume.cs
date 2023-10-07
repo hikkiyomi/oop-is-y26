@@ -1,8 +1,12 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Models;
-
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated.EngineCharacteristics;
 
-public class LogarithmicConsume : IFuelConsumptionFunction
+public class LogarithmicConsume : IFuelConsumptionFunction, ILimited
 {
-    public Fuel CalculateFuelConsumption(int time) => new(time * int.Log2(time));
+    public int Limit => 50;
+    public int FuelConsumptionPerTimeUnit => 5;
+
+    public ConsumptionResult CalculateFuelConsumption(int distance)
+        => new ConsumptionResult(
+            distance,
+            distance * int.Log2(distance) * FuelConsumptionPerTimeUnit);
 }

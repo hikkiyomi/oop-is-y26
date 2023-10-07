@@ -1,33 +1,37 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated.EngineCharacteristics;
-using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated;
 
 public abstract class Engine : IFuelConsuming
 {
+    private const int MoneyPerFuelUnit = 1;
     private readonly IFuelConsumptionFunction _engineFuelConsumer;
-    private Fuel _fuel;
 
-    protected Engine(IFuelConsumptionFunction engineFuelConsumer, Fuel startingFuelCapacity, EngineType type)
+    protected Engine(
+        IFuelConsumptionFunction engineFuelConsumer,
+        EngineType type)
     {
         _engineFuelConsumer = engineFuelConsumer;
-        _fuel = startingFuelCapacity;
         Type = type;
     }
 
     public EngineType Type { get; }
 
-    public bool TryConsumeFuel(int timePassed)
+    public EngineResult ConsumeFuel(int distance)
     {
-        Fuel fuelNeeded = _engineFuelConsumer.CalculateFuelConsumption(timePassed);
-
-        if (_fuel.Value < fuelNeeded.Value)
+        if (_engineFuelConsumer is ILimited limitedEngine)
         {
-            return false;
+            if (distance > limitedEngine.Limit)
+            {
+                return new EngineResult.LostInSpace();
+            }
         }
 
-        _fuel -= fuelNeeded;
+        ConsumptionResult consumeResult = _engineFuelConsumer.CalculateFuelConsumption(distance);
 
-        return true;
+        return new EngineResult.Success(
+            consumeResult.TimeSpent,
+            consumeResult.FuelSpent * MoneyPerFuelUnit);
     }
 }

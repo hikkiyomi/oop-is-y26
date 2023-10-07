@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
@@ -8,5 +9,5 @@ public interface IObstacle
     DamageType DamageType { get; }
     DamageSource DamageSource { get; }
 
-    void Hit(IHittable hittable);
+    DamageResult Hit(IHittable hittable);
 }

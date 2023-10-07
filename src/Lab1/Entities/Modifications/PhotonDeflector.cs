@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
@@ -12,22 +13,15 @@ public class PhotonDeflector : DeflectorModification
     {
     }
 
-    public override TravelResult TakeHit(DamageInfo damageInfo)
+    public override DamageResult TakeHit(DamageInfo damageInfo)
     {
         if (IsBroken)
         {
-            return new TravelResult.CrewDeath();
+            return new DamageResult.CrewDeath();
         }
 
-        if (Health.Value <= damageInfo.Damage.Value)
-        {
-            Health = new HealthPoints(0);
-        }
-        else
-        {
-            Health -= damageInfo.Damage;
-        }
+        Health = new HealthPoints(int.Max(Health.Value - damageInfo.Damage.Value, 0));
 
-        return new TravelResult.Success();
+        return new DamageResult.Success();
     }
 }

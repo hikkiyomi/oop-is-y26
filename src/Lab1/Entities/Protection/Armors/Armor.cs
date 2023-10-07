@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
@@ -16,11 +17,11 @@ public abstract class Armor : IBreakable
     public bool IsBroken => Health.Value == 0;
     private ReadOnlyDictionary<DamageSource, double> Coefficients { get; }
 
-    public TravelResult TakeHit(DamageInfo damageInfo)
+    public DamageResult TakeHit(DamageInfo damageInfo)
     {
         if (IsBroken)
         {
-            return new TravelResult.Destroyed();
+            return new DamageResult.Destroyed();
         }
 
         if (damageInfo.DamageSource is DamageSource.CosmoWhale)
@@ -35,8 +36,8 @@ public abstract class Armor : IBreakable
 
         return IsBroken switch
         {
-            true => new TravelResult.Destroyed(),
-            false => new TravelResult.Success(),
+            true => new DamageResult.Destroyed(),
+            false => new DamageResult.Success(),
         };
     }
 }

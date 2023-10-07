@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Models;
@@ -19,16 +20,23 @@ public abstract class Deflector : IBreakable
     public bool IsBroken => Health.Value == 0;
     private ReadOnlyDictionary<DamageSource, double> Coefficients { get; }
 
-    public TravelResult TakeHit(DamageInfo damageInfo)
+    public DamageResult TakeHit(DamageInfo damageInfo)
     {
         if (IsBroken)
         {
-            return new TravelResult.Destroyed();
+            return new DamageResult.Destroyed();
         }
 
         if (damageInfo.DamageSource is DamageSource.CosmoWhale)
         {
-            Health = new HealthPoints(0);
+            if (Health.Value >= damageInfo.Damage.Value)
+            {
+                Health = new HealthPoints(0);
+            }
+            else
+            {
+                return new DamageResult.Destroyed();
+            }
         }
         else
         {
@@ -36,6 +44,6 @@ public abstract class Deflector : IBreakable
             Health = new HealthPoints(int.Max(Health.Value - realDamage.Value, 0));
         }
 
-        return new TravelResult.Success();
+        return new DamageResult.Success();
     }
 }

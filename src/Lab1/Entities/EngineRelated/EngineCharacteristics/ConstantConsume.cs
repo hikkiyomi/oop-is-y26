@@ -1,10 +1,13 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Models;
-
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated.EngineCharacteristics;
 
 public class ConstantConsume : IFuelConsumptionFunction
 {
-    private const int FuelConsumption = 5;
+    private const int Velocity = 5;
 
-    public Fuel CalculateFuelConsumption(int time) => new(FuelConsumption);
+    public int FuelConsumptionPerTimeUnit => 2;
+
+    public ConsumptionResult CalculateFuelConsumption(int distance)
+        => new ConsumptionResult(
+            distance / Velocity,
+            distance / Velocity * FuelConsumptionPerTimeUnit);
 }

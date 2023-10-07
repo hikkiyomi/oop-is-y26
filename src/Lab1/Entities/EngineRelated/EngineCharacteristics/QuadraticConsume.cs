@@ -1,8 +1,12 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Models;
-
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated.EngineCharacteristics;
 
-public class QuadraticConsume : IFuelConsumptionFunction
+public class QuadraticConsume : IFuelConsumptionFunction, ILimited
 {
-    public Fuel CalculateFuelConsumption(int time) => new(time * time);
+    public int Limit => 100;
+    public int FuelConsumptionPerTimeUnit => 5;
+
+    public ConsumptionResult CalculateFuelConsumption(int distance)
+        => new ConsumptionResult(
+            distance,
+            distance * distance * FuelConsumptionPerTimeUnit);
 }
