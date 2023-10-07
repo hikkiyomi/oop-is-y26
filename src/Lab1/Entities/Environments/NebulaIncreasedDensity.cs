@@ -6,10 +6,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environments;
 
 public class NebulaIncreasedDensity : IEnvironment
 {
-    public NebulaIncreasedDensity(EngineType engineRestriction, IReadOnlyCollection<IObstacle> obstacles)
+    public NebulaIncreasedDensity(IReadOnlyCollection<IObstacle> obstacles)
     {
-        EngineRestriction = engineRestriction;
         Obstacles = obstacles;
+        EngineRestriction = EngineType.Jump;
     }
 
     public EngineType EngineRestriction { get; }

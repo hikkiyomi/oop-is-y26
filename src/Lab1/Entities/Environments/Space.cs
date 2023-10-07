@@ -6,10 +6,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environments;
 
 public class Space : IEnvironment
 {
-    public Space(EngineType engineRestriction, IReadOnlyCollection<IObstacle> obstacles)
+    public Space(IReadOnlyCollection<IObstacle> obstacles)
     {
-        EngineRestriction = engineRestriction;
         Obstacles = obstacles;
+        EngineRestriction = EngineType.Impulse;
     }
 
     public EngineType EngineRestriction { get; }

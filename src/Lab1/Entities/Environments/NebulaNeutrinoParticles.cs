@@ -6,10 +6,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environments;
 
 public class NebulaNeutrinoParticles : IEnvironment
 {
-    public NebulaNeutrinoParticles(EngineType engineRestriction, IReadOnlyCollection<IObstacle> obstacles)
+    public NebulaNeutrinoParticles(IReadOnlyCollection<IObstacle> obstacles)
     {
-        EngineRestriction = engineRestriction;
         Obstacles = obstacles;
+        EngineRestriction = EngineType.Impulse;
     }
 
     public EngineType EngineRestriction { get; }

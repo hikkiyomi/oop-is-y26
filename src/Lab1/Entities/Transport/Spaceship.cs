@@ -24,9 +24,9 @@ public abstract class Spaceship : ITravelSuitable, IHittable
         Armor = armor;
     }
 
+    public Deflector? Deflector { get; }
     private IReadOnlyCollection<Engine> Engines { get; }
     private ShipModification? ShipModification { get; }
-    private Deflector? Deflector { get; }
     private Armor Armor { get; }
 
     public TravelResult Travel(IRouteSegment segment)
@@ -70,13 +70,7 @@ public abstract class Spaceship : ITravelSuitable, IHittable
             break;
         }
 
-        if (result is null)
-        {
-            throw new ShipException(
-                "No suitable engine found.");
-        }
-
-        return result;
+        return result ?? new TravelResult.LostInSpace();
     }
 
     public DamageResult TakeHit(DamageInfo damageInfo)

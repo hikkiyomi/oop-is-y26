@@ -20,7 +20,7 @@ public class Route : ITraversable
 
         foreach (IRouteSegment segment in _segments)
         {
-            TravelResult result = transport.Travel(segment);
+            TravelResult result = segment.Traverse(transport);
 
             if (result is TravelResult.Success successfulResult)
             {
