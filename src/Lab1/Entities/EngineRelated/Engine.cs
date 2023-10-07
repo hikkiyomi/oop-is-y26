@@ -3,12 +3,12 @@ using Itmo.ObjectOrientedProgramming.Lab1.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.EngineRelated;
 
-public class Engine : IFuelConsuming
+public abstract class Engine : IFuelConsuming
 {
     private readonly IFuelConsumptionFunction _engineFuelConsumer;
     private Fuel _fuel;
 
-    public Engine(IFuelConsumptionFunction engineFuelConsumer, Fuel startingFuelCapacity, EngineType type)
+    protected Engine(IFuelConsumptionFunction engineFuelConsumer, Fuel startingFuelCapacity, EngineType type)
     {
         _engineFuelConsumer = engineFuelConsumer;
         _fuel = startingFuelCapacity;
