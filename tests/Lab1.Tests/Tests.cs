@@ -1,6 +1,6 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Environments;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.RouteRelated;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Transport;
@@ -91,7 +91,7 @@ public class Tests
     }
 
     [Fact]
-    public void ShuttleAndWaklasInLongNebulaNeutrinoRoute()
+    public void ShuttleAndWaklasInLongNebulaNeutrinoRouteWaklasIsBetter()
     {
         var segment = new RouteSegment(
             1000,
@@ -109,8 +109,11 @@ public class Tests
         Assert.True(costShuttle > costWaklas);
     }
 
-    [Fact]
-    public void StellaShouldBeDestroyedMeridianCrewShouldBeDeadWaklasShouldBeDestroyedAugurCrewShouldBeDead()
+    [Theory]
+    [ClassData(typeof(ForthTestDataGenerator))]
+    public void StellaShouldBeDestroyedMeridianCrewShouldBeDeadWaklasShouldBeDestroyedAugurCrewShouldBeDead(
+        Spaceship ship,
+        Type awaitedResult)
     {
         var route = new Route(new[]
         {
@@ -131,14 +134,8 @@ public class Tests
                 new NebulaIncreasedDensity(System.Array.Empty<IObstacle>())),
         });
 
-        TravelResult resultStella = route.Traverse(new Stella(null));
-        TravelResult resultMeridian = route.Traverse(new Meridian());
-        TravelResult resultWaklas = route.Traverse(new Waklas(new PhotonDeflector()));
-        TravelResult resultAugur = route.Traverse(new Augur(null));
+        TravelResult result = route.Traverse(ship);
 
-        Assert.IsType<TravelResult.Destroyed>(resultStella);
-        Assert.IsType<TravelResult.CrewDeath>(resultMeridian);
-        Assert.IsType<TravelResult.Destroyed>(resultWaklas);
-        Assert.IsType<TravelResult.CrewDeath>(resultAugur);
+        Assert.IsType(awaitedResult, result);
     }
 }
