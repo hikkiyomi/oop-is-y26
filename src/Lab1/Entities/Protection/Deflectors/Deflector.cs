@@ -1,4 +1,5 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Common;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Modifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacles;
@@ -8,17 +9,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Protection.Deflectors;
 
 public abstract class Deflector : IBreakable
 {
-    protected Deflector(HealthPoints health, DeflectorModification? deflectorModification, ReadOnlyDictionary<DamageSource, double> coefficients)
+    protected Deflector(
+        HealthPoints health,
+        DeflectorModification? deflectorModification,
+        IEnumerable<CoefficientDto> coefficients)
     {
         Health = health;
         Modification = deflectorModification;
-        Coefficients = coefficients;
+        Coefficients = coefficients.ToDictionary(
+            dto => dto.Source,
+            dto => dto.Coefficient);
     }
 
     public HealthPoints Health { get; private set; }
     public DeflectorModification? Modification { get; }
     public bool IsBroken => Health.Value == 0;
-    private ReadOnlyDictionary<DamageSource, double> Coefficients { get; }
+    private IReadOnlyDictionary<DamageSource, double> Coefficients { get; }
 
     public DamageResult TakeHit(DamageInfo damageInfo)
     {
