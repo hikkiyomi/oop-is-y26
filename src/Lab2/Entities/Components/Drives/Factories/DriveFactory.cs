@@ -2,7 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Drives.Factori
 
 public abstract class DriveFactory
 {
-    protected abstract IDrive Create(
+    public abstract IDrive Create(
         int primarySpeedInfo,
         double memory,
         int voltage);

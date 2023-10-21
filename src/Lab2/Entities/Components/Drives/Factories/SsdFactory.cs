@@ -13,7 +13,7 @@ public class SsdFactory : DriveFactory
         _connection = connection;
     }
 
-    protected override IDrive Create(
+    public override IDrive Create(
         int primarySpeedInfo,
         double memory,
         int voltage)

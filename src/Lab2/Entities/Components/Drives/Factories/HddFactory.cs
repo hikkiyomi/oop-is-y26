@@ -6,7 +6,7 @@ public class HddFactory : DriveFactory
 {
     private readonly IDriveConnection _connection = new SataConnection("SATA");
 
-    protected override IDrive Create(
+    public override IDrive Create(
         int primarySpeedInfo,
         double memory,
         int voltage)
