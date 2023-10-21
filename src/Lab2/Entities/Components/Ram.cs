@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Attributes;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts;
 using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;

@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Attributes;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts;
 
 public interface IWifiStandard : IComponentPart
 {
