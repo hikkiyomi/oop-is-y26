@@ -1,4 +1,4 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Common;
+using Itmo.ObjectOrientedProgramming.Lab2.Common.Exceptions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 
@@ -21,7 +21,6 @@ public class RamState
         Frequency = frequency;
         Voltage = voltage;
     }
-
 
     public double Frequency { get; }
     public int Voltage { get; }

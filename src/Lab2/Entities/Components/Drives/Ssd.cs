@@ -1,27 +1,36 @@
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Drives.DriveConnections;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Drives.DriveSpeeds;
+
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Drives;
 
-public abstract class Drive : IComponent, IPrototype<Drive>, IMemoryUsing, IPowerConsuming
+public class Ssd : IDrive, IPrototype<Ssd>
 {
-    protected Drive(
+    public Ssd(
         IDriveConnection connection,
-        IDriveSpeed maxSpeed,
+        int primarySpeedInfo,
+        int secondarySpeedInfo,
         double memory,
         int voltage)
     {
         Connection = connection;
-        MaxSpeed = maxSpeed;
+        Speed = new SsdSpeed(primarySpeedInfo, secondarySpeedInfo);
         Memory = memory;
         Voltage = voltage;
     }
 
     public IDriveConnection Connection { get; }
-    public IDriveSpeed MaxSpeed { get; }
+    public IDriveSpeed Speed { get; }
     public double Memory { get; }
     public int Voltage { get; }
 
-    public Drive Clone()
+    public Ssd Clone()
     {
         throw new System.NotImplementedException();
+    }
+
+    IDrive IPrototype<IDrive>.Clone()
+    {
+        return Clone();
     }
 
     IComponent IPrototype<IComponent>.Clone()

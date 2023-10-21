@@ -1,6 +1,6 @@
 using System;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Common;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Common.Exceptions;
 
 public class RamStateException : Exception
 {
