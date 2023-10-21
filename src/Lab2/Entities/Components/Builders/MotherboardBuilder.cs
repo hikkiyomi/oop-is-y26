@@ -14,7 +14,6 @@ public class MotherboardBuilder
     private IFormFactor? _formFactor;
     private Bios? _bios;
     private IWifiModule? _wifiModule;
-    private bool? _isXmpCompatible;
 
     public MotherboardBuilder SetSocket(ISocket socket)
     {
@@ -79,13 +78,6 @@ public class MotherboardBuilder
         return this;
     }
 
-    public MotherboardBuilder SetXmpCompatible(bool isXmpCompatible)
-    {
-        _isXmpCompatible = isXmpCompatible;
-
-        return this;
-    }
-
     public Motherboard Build()
     {
         return new Motherboard(
@@ -97,7 +89,6 @@ public class MotherboardBuilder
             _ddrStandard ?? throw new MotherboardValidationException("Motherboard should have a DDR standard"),
             _formFactor ?? throw new MotherboardValidationException("Motherboard should have a form factor"),
             _bios ?? throw new MotherboardValidationException("Motherboard should have a BIOS"),
-            _wifiModule,
-            _isXmpCompatible ?? throw new MotherboardValidationException("Motherboard should be recognized if it is XMP compatible"));
+            _wifiModule);
     }
 }

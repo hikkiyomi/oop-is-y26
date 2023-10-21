@@ -13,8 +13,7 @@ public class Motherboard : IComponent, IPrototype<Motherboard>
         IDdrStandard ddrStandard,
         IFormFactor formFactor,
         Bios bios,
-        IWifiModule? wifiModule,
-        bool isXmpCompatible)
+        IWifiModule? wifiModule)
     {
         Socket = socket;
         PciLines = pciLines;
@@ -25,7 +24,6 @@ public class Motherboard : IComponent, IPrototype<Motherboard>
         FormFactor = formFactor;
         Bios = bios;
         WifiModule = wifiModule;
-        IsXmpCompatible = isXmpCompatible;
     }
 
     public ISocket Socket { get; }
@@ -37,7 +35,6 @@ public class Motherboard : IComponent, IPrototype<Motherboard>
     public IFormFactor FormFactor { get; }
     public Bios Bios { get; }
     public IWifiModule? WifiModule { get; }
-    public bool IsXmpCompatible { get; }
 
     public Motherboard Clone()
     {
@@ -50,8 +47,7 @@ public class Motherboard : IComponent, IPrototype<Motherboard>
             DdrStandard,
             FormFactor,
             Bios,
-            WifiModule,
-            IsXmpCompatible);
+            WifiModule);
     }
 
     IComponent IPrototype<IComponent>.Clone()
