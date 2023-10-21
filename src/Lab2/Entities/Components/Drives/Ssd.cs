@@ -7,25 +7,31 @@ public class Ssd : IDrive, IPrototype<Ssd>
 {
     public Ssd(
         IDriveConnection connection,
-        int primarySpeedInfo,
-        int secondarySpeedInfo,
+        int readingSpeed,
+        int writingSpeed,
         double memory,
         int voltage)
     {
         Connection = connection;
-        Speed = new SsdSpeed(primarySpeedInfo, secondarySpeedInfo);
+        Speed = new SsdSpeed(readingSpeed, writingSpeed);
         Memory = memory;
         Voltage = voltage;
     }
 
     public IDriveConnection Connection { get; }
-    public IDriveSpeed Speed { get; }
+    public SsdSpeed Speed { get; }
+    public IDriveSpeed SpeedInfo => Speed;
     public double Memory { get; }
     public int Voltage { get; }
 
     public Ssd Clone()
     {
-        throw new System.NotImplementedException();
+        return new Ssd(
+            Connection,
+            Speed.PrimarySpeedInfo,
+            Speed.SecondarySpeedInfo,
+            Memory,
+            Voltage);
     }
 
     IDrive IPrototype<IDrive>.Clone()

@@ -30,6 +30,6 @@ public class CoolingSystem : IComponent, IPrototype<CoolingSystem>, ISized
 
     IComponent IPrototype<IComponent>.Clone()
     {
-        throw new System.NotImplementedException();
+        return Clone();
     }
 }

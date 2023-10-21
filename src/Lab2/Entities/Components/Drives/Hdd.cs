@@ -7,20 +7,21 @@ public class Hdd : IDrive, IPrototype<Hdd>
 {
     public Hdd(
         IDriveConnection connection,
-        int speed,
+        int spindleSpeed,
         double memory,
         int voltage)
     {
         Connection = connection;
-        Speed = new HddSpeed(speed);
+        Speed = new HddSpeed(spindleSpeed);
         Memory = memory;
         Voltage = voltage;
     }
 
     public IDriveConnection Connection { get; }
-    public IDriveSpeed Speed { get; }
+    public HddSpeed Speed { get; }
     public double Memory { get; }
     public int Voltage { get; }
+    public IDriveSpeed SpeedInfo => Speed;
 
     public Hdd Clone()
     {

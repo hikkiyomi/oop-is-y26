@@ -35,7 +35,13 @@ public class Ram : IComponent, IPrototype<Ram>, IMemoryUsing, IPowerConsuming
 
     public Ram Clone()
     {
-        throw new System.NotImplementedException();
+        return new Ram(
+            Memory,
+            _supportedStates,
+            _profiles,
+            FormFactor,
+            DdrStandard,
+            Voltage);
     }
 
     IComponent IPrototype<IComponent>.Clone()

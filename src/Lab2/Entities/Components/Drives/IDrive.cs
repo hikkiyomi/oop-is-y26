@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Drives;
 public interface IDrive : IComponent, IPrototype<IDrive>, IMemoryUsing, IPowerConsuming
 {
     IDriveConnection Connection { get; }
-    IDriveSpeed Speed { get; }
+    IDriveSpeed SpeedInfo { get; }
 }
