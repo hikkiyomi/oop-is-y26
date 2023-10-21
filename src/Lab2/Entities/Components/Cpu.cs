@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 
 public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
 {
-    private readonly List<double> _supportedMemoryFrequencies;
+    private readonly IList<double> _supportedMemoryFrequencies;
 
     public Cpu(
         double frequency,

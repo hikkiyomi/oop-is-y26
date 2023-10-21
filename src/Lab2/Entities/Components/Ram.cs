@@ -11,8 +11,8 @@ public class Ram
     IMemoryStorage,
     IPowerConsuming
 {
-    private readonly List<RamState> _supportedStates;
-    private readonly List<XmpProfile> _profiles;
+    private readonly IList<RamState> _supportedStates;
+    private readonly IList<XmpProfile> _profiles;
 
     public Ram(
         double memory,
