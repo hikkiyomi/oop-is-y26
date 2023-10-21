@@ -8,9 +8,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 public class PcCaseBuilder
 {
     private readonly List<IFormFactor> _supportedFormFactors = new List<IFormFactor>();
-    private Dimensions _size;
-    private Dimensions _maxGpuSize;
-    private Dimensions _maxCoolingSize;
+    private Dimensions? _size;
+    private Dimensions? _maxGpuSize;
+    private Dimensions? _maxCoolingSize;
 
     public PcCaseBuilder AddSupportedFormFactor(IFormFactor formFactor)
     {
