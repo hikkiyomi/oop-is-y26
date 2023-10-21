@@ -1,6 +1,6 @@
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Common;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Services.Validators;

@@ -1,6 +1,6 @@
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Common;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Services.Validators;
 
@@ -8,7 +8,7 @@ public class CpuValidator : IValidator
 {
     public BuildResult Validate(PersonalComputer pc)
     {
-        if (pc.Motherboard.Bios.SupportedCpu.All(cpu => cpu != pc.Cpu))
+        if (pc.Motherboard.Bios.SupportedCpu.All(cpu => !cpu.Equals(pc.Cpu)))
         {
             return new BuildResult.Incompatible();
         }

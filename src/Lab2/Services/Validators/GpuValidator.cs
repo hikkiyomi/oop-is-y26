@@ -1,5 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Common;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Services.Validators;
 

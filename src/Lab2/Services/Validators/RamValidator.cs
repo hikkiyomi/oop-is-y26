@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Common;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Services.Validators;
@@ -15,7 +17,7 @@ public class RamValidator : IValidator
 
         bool misc = pc.Ram.Aggregate(
             true,
-            (current, ram) => current & ram.DdrStandard == pc.Motherboard.DdrStandard);
+            (current, ram) => current & ram.DdrStandard.Equals(pc.Motherboard.DdrStandard)); // TODO
 
         bool misc1 = pc.Ram.Aggregate(
             false,
@@ -43,7 +45,7 @@ public class RamValidator : IValidator
                     false,
                     (current, profile)
                         => current | pc.Cpu.MemoryFrequencies
-                            .Any(freq => freq == profile.State.Frequency));
+                            .Any(freq => Math.Abs(freq - profile.State.Frequency) < 1e-9));
 
             if (!profileExist)
             {

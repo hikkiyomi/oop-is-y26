@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts;
@@ -49,5 +50,16 @@ public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();
+    }
+
+    public bool Equals(Cpu other)
+    {
+        return _supportedMemoryFrequencies.SequenceEqual(other._supportedMemoryFrequencies)
+               && Frequency.Equals(other.Frequency)
+               && Cores == other.Cores
+               && Socket.Equals(other.Socket) // TODO
+               && Equals(GraphicsCore, other.GraphicsCore) // TODO
+               && Tdp == other.Tdp
+               && Voltage == other.Voltage;
     }
 }

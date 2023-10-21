@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Drives;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
 public class PersonalComputer
 {
