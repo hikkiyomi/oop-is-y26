@@ -6,13 +6,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 
 public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
 {
-    private readonly IList<double> _supportedMemoryFrequencies;
+    private readonly List<double> _supportedMemoryFrequencies;
 
     public Cpu(
         double frequency,
         int cores,
         ISocket socket,
-        IGraphicsCore graphicsCore,
+        IGraphicsCore? graphicsCore,
         IEnumerable<double> supportedMemoryFrequencies,
         int tdp,
         int voltage)
@@ -29,7 +29,7 @@ public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
     public double Frequency { get; }
     public int Cores { get; }
     public ISocket Socket { get; }
-    public IGraphicsCore GraphicsCore { get; }
+    public IGraphicsCore? GraphicsCore { get; }
     public IReadOnlyCollection<double> MemoryFrequencies => _supportedMemoryFrequencies.AsReadOnly();
     public int Tdp { get; }
     public int Voltage { get; }

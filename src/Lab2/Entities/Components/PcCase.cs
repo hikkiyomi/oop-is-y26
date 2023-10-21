@@ -10,7 +10,7 @@ public class PcCase
     IPrototype<PcCase>,
     ISized
 {
-    private readonly IList<IFormFactor> _supportedFormFactors;
+    private readonly List<IFormFactor> _supportedFormFactors;
 
     public PcCase(
         Dimensions size,

@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 
 public class CoolingSystem : IComponent, IPrototype<CoolingSystem>, ISized
 {
-    private readonly IList<ISocket> _supportedSockets;
+    private readonly List<ISocket> _supportedSockets;
 
     public CoolingSystem(Dimensions size, IEnumerable<ISocket> supportedSockets, int maxTdp)
     {
