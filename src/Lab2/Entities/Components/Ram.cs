@@ -5,7 +5,11 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 
-public class Ram : IComponent, IPrototype<Ram>, IMemoryUsing, IPowerConsuming
+public class Ram
+    : IComponent,
+    IPrototype<Ram>,
+    IMemoryStorage,
+    IPowerConsuming
 {
     private readonly IList<RamState> _supportedStates;
     private readonly IList<XmpProfile> _profiles;

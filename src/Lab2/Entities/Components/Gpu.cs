@@ -2,7 +2,12 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 
-public class Gpu : IComponent, IPrototype<Gpu>, ISized, IMemoryUsing, IPowerConsuming
+public class Gpu
+    : IComponent,
+    IPrototype<Gpu>,
+    ISized,
+    IMemoryStorage,
+    IPowerConsuming
 {
     public Gpu(
         Dimensions size,

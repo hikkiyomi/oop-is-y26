@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
-public interface IMemoryUsing
+public interface IMemoryStorage
 {
     double Memory { get; }
 }
