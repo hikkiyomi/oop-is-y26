@@ -18,4 +18,9 @@ public class PowerSupply : IComponent, IPrototype<PowerSupply>
     {
         return Clone();
     }
+
+    public bool Equals(PowerSupply other)
+    {
+        return MaxVoltage == other.MaxVoltage;
+    }
 }

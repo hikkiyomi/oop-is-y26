@@ -8,14 +8,14 @@ public class Bios : IComponent, IPrototype<Bios>
 {
     private readonly IList<Cpu> _supportedCpu;
 
-    public Bios(IBiosType biosType, string version, IEnumerable<Cpu> supportedCpu)
+    public Bios(BiosType biosType, string version, IEnumerable<Cpu> supportedCpu)
     {
         BiosType = biosType;
         Version = version;
         _supportedCpu = supportedCpu.ToList();
     }
 
-    public IBiosType BiosType { get; }
+    public BiosType BiosType { get; }
     public string Version { get; }
     public IReadOnlyCollection<Cpu> SupportedCpu => _supportedCpu.AsReadOnly();
 
@@ -30,5 +30,12 @@ public class Bios : IComponent, IPrototype<Bios>
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();
+    }
+
+    public bool Equals(Bios other)
+    {
+        return _supportedCpu.SequenceEqual(other._supportedCpu)
+               && BiosType.Equals(other.BiosType)
+               && Version == other.Version;
     }
 }

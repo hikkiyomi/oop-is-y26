@@ -8,10 +8,20 @@ public class MotherboardValidator : IValidator
 {
     public BuildResult Validate(PersonalComputer pc)
     {
-        return pc.Motherboard.Socket.Equals(pc.Cpu.Socket)
-               && pc.CoolingSystem.SupportedSockets.Any(socket => socket.Equals(pc.Motherboard.Socket)) // TODO
-               && pc.PcCase.SupportedFormFactors.Any(formFactor => formFactor.Equals(pc.Motherboard.FormFactor)) // TODO
+        if (!pc.Motherboard.Socket.Equals(pc.Cpu.Socket))
+        {
+            return new BuildResult.Incompatible("Motherboard socket is not compatible with CPU socket");
+        }
+
+        if (!pc.CoolingSystem.SupportedSockets
+                .Any(socket => socket.Equals(pc.Motherboard.Socket)))
+        {
+            return new BuildResult.Incompatible("Motherboard socket is not compatible with any of cooling system sockets.");
+        }
+
+        return pc.PcCase.SupportedFormFactors
+            .Any(formFactor => formFactor.Equals(pc.Motherboard.FormFactor))
             ? new BuildResult.Success()
-            : new BuildResult.Incompatible();
+            : new BuildResult.Incompatible("Motherboard form factor is not compatible with PC case.");
     }
 }

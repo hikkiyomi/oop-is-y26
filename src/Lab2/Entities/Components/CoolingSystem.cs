@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts;
@@ -7,9 +8,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 
 public class CoolingSystem : IComponent, IPrototype<CoolingSystem>, ISized
 {
-    private readonly IList<ISocket> _supportedSockets;
+    private readonly IList<Socket> _supportedSockets;
 
-    public CoolingSystem(Dimensions size, IEnumerable<ISocket> supportedSockets, int maxTdp)
+    public CoolingSystem(Dimensions size, IEnumerable<Socket> supportedSockets, int maxTdp)
     {
         Size = size;
         _supportedSockets = supportedSockets.ToList();
@@ -17,7 +18,7 @@ public class CoolingSystem : IComponent, IPrototype<CoolingSystem>, ISized
     }
 
     public Dimensions Size { get; }
-    public IReadOnlyCollection<ISocket> SupportedSockets => _supportedSockets.AsReadOnly();
+    public IReadOnlyCollection<Socket> SupportedSockets => _supportedSockets.AsReadOnly();
     public int MaxTdp { get; }
 
     public CoolingSystem Clone()
@@ -31,5 +32,12 @@ public class CoolingSystem : IComponent, IPrototype<CoolingSystem>, ISized
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();
+    }
+
+    public bool Equals(CoolingSystem other)
+    {
+        return _supportedSockets.SequenceEqual(other._supportedSockets)
+               && Size.Equals(other.Size)
+               && MaxTdp == other.MaxTdp;
     }
 }

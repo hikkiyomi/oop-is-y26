@@ -10,6 +10,6 @@ public static class RepositoryController
     public static T GetById<T>(int id)
         where T : IPrototype<T>
     {
-        return (T)Repository.GetInstance.GetComponent(id);
+        return (T)Repository.GetInstance.GetComponent(id).Clone();
     }
 }

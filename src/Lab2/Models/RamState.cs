@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Common.Exceptions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 
-public class RamState
+public record RamState
 {
     public RamState(double frequency, int voltage)
     {

@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts.ConcreteParts;
 
-public class Ddr4 : IDdrStandard
+public record Ddr4 : DdrStandard
 {
-    public string Name => "DDR4";
+    public override string Name => "DDR4";
 }

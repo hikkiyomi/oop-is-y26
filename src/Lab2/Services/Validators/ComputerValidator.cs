@@ -19,16 +19,19 @@ public class ComputerValidator : IValidator
 
     public BuildResult Validate(PersonalComputer pc)
     {
+        BuildResult? totalResult = null;
+
         foreach (IValidator validator in _validators)
         {
             BuildResult result = validator.Validate(pc);
 
-            if (result is not BuildResult.Success)
+            if (totalResult is null
+                || totalResult.Priority < result.Priority)
             {
-                return result;
+                totalResult = result;
             }
         }
 
-        return new BuildResult.Success();
+        return totalResult ?? new BuildResult.Success();
     }
 }

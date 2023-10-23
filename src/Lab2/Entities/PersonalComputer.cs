@@ -67,14 +67,15 @@ public class PersonalComputer
     public IReadOnlyCollection<IPowerConsuming> PowerConsumings
         => _powerConsumings.AsReadOnly();
 
-    public PersonalComputerBuilder Direct(PersonalComputerBuilder builder)
+    public IPcBuilder Direct(IPcBuilder builder)
     {
         builder.Reset();
-        builder.SetMotherboard(Motherboard);
-        builder.SetCpu(Cpu);
-        builder.SetCoolingSystem(CoolingSystem);
-        builder.SetPcCase(PcCase);
-        builder.SetPowerSupply(PowerSupply);
+
+        builder.SetMotherboard(Motherboard)
+            .SetCpu(Cpu)
+            .SetCoolingSystem(CoolingSystem)
+            .SetPcCase(PcCase)
+            .SetPowerSupply(PowerSupply);
 
         foreach (Ram ram in Ram)
         {

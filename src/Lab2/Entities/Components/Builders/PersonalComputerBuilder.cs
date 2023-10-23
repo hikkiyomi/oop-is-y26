@@ -30,56 +30,56 @@ public class PersonalComputerBuilder : IPcBuilder
         _powerSupply = null;
     }
 
-    public PersonalComputerBuilder AddGpu(Gpu gpu)
+    public IPcBuilder AddGpu(Gpu gpu)
     {
         _gpus.Add(gpu);
 
         return this;
     }
 
-    public PersonalComputerBuilder AddDrive(IDrive drive)
+    public IPcBuilder AddDrive(IDrive drive)
     {
         _drives.Add(drive);
 
         return this;
     }
 
-    public PersonalComputerBuilder AddRam(Ram ram)
+    public IPcBuilder AddRam(Ram ram)
     {
         _rams.Add(ram);
 
         return this;
     }
 
-    public PersonalComputerBuilder SetMotherboard(Motherboard motherboard)
+    public IPcBuilder SetMotherboard(Motherboard motherboard)
     {
         _motherboard = motherboard;
 
         return this;
     }
 
-    public PersonalComputerBuilder SetCpu(Cpu cpu)
+    public IPcBuilder SetCpu(Cpu cpu)
     {
         _cpu = cpu;
 
         return this;
     }
 
-    public PersonalComputerBuilder SetCoolingSystem(CoolingSystem system)
+    public IPcBuilder SetCoolingSystem(CoolingSystem coolingSystem)
     {
-        _coolingSystem = system;
+        _coolingSystem = coolingSystem;
 
         return this;
     }
 
-    public PersonalComputerBuilder SetPcCase(PcCase pcCase)
+    public IPcBuilder SetPcCase(PcCase pcCase)
     {
         _pcCase = pcCase;
 
         return this;
     }
 
-    public PersonalComputerBuilder SetPowerSupply(PowerSupply powerSupply)
+    public IPcBuilder SetPowerSupply(PowerSupply powerSupply)
     {
         _powerSupply = powerSupply;
 

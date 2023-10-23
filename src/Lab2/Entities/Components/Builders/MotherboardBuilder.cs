@@ -5,17 +5,30 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
 public class MotherboardBuilder : IComponentBuilder
 {
-    private ISocket? _socket;
+    private Socket? _socket;
     private int? _pciLines;
     private int? _sataPorts;
     private int? _ramSlots;
-    private IChipset? _chipset;
-    private IDdrStandard? _ddrStandard;
-    private IFormFactor? _formFactor;
+    private Chipset? _chipset;
+    private DdrStandard? _ddrStandard;
+    private FormFactor? _formFactor;
     private Bios? _bios;
-    private IWifiModule? _wifiModule;
+    private WifiModule? _wifiModule;
 
-    public MotherboardBuilder SetSocket(ISocket socket)
+    public void Reset()
+    {
+        _socket = null;
+        _pciLines = null;
+        _sataPorts = null;
+        _ramSlots = null;
+        _chipset = null;
+        _ddrStandard = null;
+        _formFactor = null;
+        _bios = null;
+        _wifiModule = null;
+    }
+
+    public MotherboardBuilder SetSocket(Socket socket)
     {
         _socket = socket;
 
@@ -43,21 +56,21 @@ public class MotherboardBuilder : IComponentBuilder
         return this;
     }
 
-    public MotherboardBuilder SetChipset(IChipset chipset)
+    public MotherboardBuilder SetChipset(Chipset chipset)
     {
         _chipset = chipset;
 
         return this;
     }
 
-    public MotherboardBuilder SetDdrStandard(IDdrStandard ddrStandard)
+    public MotherboardBuilder SetDdrStandard(DdrStandard ddrStandard)
     {
         _ddrStandard = ddrStandard;
 
         return this;
     }
 
-    public MotherboardBuilder SetFormFactor(IFormFactor formFactor)
+    public MotherboardBuilder SetFormFactor(FormFactor formFactor)
     {
         _formFactor = formFactor;
 
@@ -71,7 +84,7 @@ public class MotherboardBuilder : IComponentBuilder
         return this;
     }
 
-    public MotherboardBuilder SetWifiModule(IWifiModule wifiModule)
+    public MotherboardBuilder SetWifiModule(WifiModule wifiModule)
     {
         _wifiModule = wifiModule;
 

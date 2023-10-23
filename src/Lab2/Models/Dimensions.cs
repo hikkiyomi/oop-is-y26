@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Common.Exceptions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 
-public class Dimensions
+public record Dimensions
 {
     public Dimensions(int length, int width, int height)
     {

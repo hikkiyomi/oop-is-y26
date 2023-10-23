@@ -10,13 +10,13 @@ public class PcCase
     IPrototype<PcCase>,
     ISized
 {
-    private readonly IList<IFormFactor> _supportedFormFactors;
+    private readonly IList<FormFactor> _supportedFormFactors;
 
     public PcCase(
         Dimensions size,
         Dimensions maxGpuSize,
         Dimensions maxCoolingSize,
-        IEnumerable<IFormFactor> supportedFormFactors)
+        IEnumerable<FormFactor> supportedFormFactors)
     {
         Size = size;
         MaxGpuSize = maxGpuSize;
@@ -28,7 +28,7 @@ public class PcCase
     public Dimensions MaxGpuSize { get; }
     public Dimensions MaxCoolingSize { get; }
 
-    public IReadOnlyCollection<IFormFactor> SupportedFormFactors
+    public IReadOnlyCollection<FormFactor> SupportedFormFactors
         => _supportedFormFactors.AsReadOnly();
 
     public PcCase Clone()
@@ -43,5 +43,13 @@ public class PcCase
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();
+    }
+
+    public bool Equals(PcCase other)
+    {
+        return Size == other.Size
+               && MaxGpuSize == other.MaxGpuSize
+               && MaxCoolingSize == other.MaxCoolingSize
+               && _supportedFormFactors.SequenceEqual(other._supportedFormFactors);
     }
 }

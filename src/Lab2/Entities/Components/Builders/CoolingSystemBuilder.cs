@@ -7,9 +7,16 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
 public class CoolingSystemBuilder : IComponentBuilder
 {
-    private readonly List<ISocket> _supportedSockets = new List<ISocket>();
+    private readonly List<Socket> _supportedSockets = new List<Socket>();
     private Dimensions? _size;
     private int? _maxTdp;
+
+    public void Reset()
+    {
+        _supportedSockets.Clear();
+        _size = null;
+        _maxTdp = null;
+    }
 
     public CoolingSystemBuilder SetSize(
         int length,
@@ -21,7 +28,7 @@ public class CoolingSystemBuilder : IComponentBuilder
         return this;
     }
 
-    public CoolingSystemBuilder AddSocket(ISocket socket)
+    public CoolingSystemBuilder AddSocket(Socket socket)
     {
         _supportedSockets.Add(socket);
 

@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts.ConcreteParts;
 
-public class Am4 : ISocket
+public record Am4 : Socket
 {
-    public string Name => "AM4";
+    public override string Name => "AM4";
 }

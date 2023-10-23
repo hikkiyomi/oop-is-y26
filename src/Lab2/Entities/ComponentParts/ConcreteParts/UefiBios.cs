@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts.ConcreteParts;
 
-public class UefiBios : IBiosType
+public record UefiBios : BiosType
 {
-    public string Name => "UEFI";
+    public override string Name => "UEFI";
 }

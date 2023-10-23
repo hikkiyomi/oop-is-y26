@@ -10,9 +10,19 @@ public class RamBuilder : IComponentBuilder
     private readonly List<RamState> _supportedStates = new List<RamState>();
     private readonly List<XmpProfile> _profiles = new List<XmpProfile>();
     private double? _memory;
-    private IFormFactor? _formFactor;
-    private IDdrStandard? _ddrStandard;
+    private FormFactor? _formFactor;
+    private DdrStandard? _ddrStandard;
     private int? _voltage;
+
+    public void Reset()
+    {
+        _supportedStates.Clear();
+        _profiles.Clear();
+        _memory = null;
+        _formFactor = null;
+        _ddrStandard = null;
+        _voltage = null;
+    }
 
     public RamBuilder SetMemory(double memory)
     {
@@ -41,14 +51,14 @@ public class RamBuilder : IComponentBuilder
         return this;
     }
 
-    public RamBuilder SetFormFactor(IFormFactor formFactor)
+    public RamBuilder SetFormFactor(FormFactor formFactor)
     {
         _formFactor = formFactor;
 
         return this;
     }
 
-    public RamBuilder SetDdrStandard(IDdrStandard ddrStandard)
+    public RamBuilder SetDdrStandard(DdrStandard ddrStandard)
     {
         _ddrStandard = ddrStandard;
 

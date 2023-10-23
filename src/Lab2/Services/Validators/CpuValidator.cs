@@ -10,10 +10,10 @@ public class CpuValidator : IValidator
     {
         if (pc.Motherboard.Bios.SupportedCpu.All(cpu => !cpu.Equals(pc.Cpu)))
         {
-            return new BuildResult.Incompatible();
+            return new BuildResult.Incompatible("CPU is not supported by BIOS.");
         }
 
-        if (pc.Cpu.Tdp <= pc.CoolingSystem.MaxTdp)
+        if (pc.Cpu.Tdp > pc.CoolingSystem.MaxTdp)
         {
             return new BuildResult.WarrantyLoss("TDP exceeds the maximum TDP");
         }

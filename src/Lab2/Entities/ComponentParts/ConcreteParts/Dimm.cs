@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts.ConcreteParts;
 
-public class Dimm : IFormFactor
+public record Dimm : FormFactor
 {
-    public string Name => "DIMM";
+    public override string Name => "DIMM";
 }

@@ -5,15 +5,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 public class Motherboard : IComponent, IPrototype<Motherboard>
 {
     public Motherboard(
-        ISocket socket,
+        Socket socket,
         int pciLines,
         int sataPorts,
         int ramSlots,
-        IChipset chipset,
-        IDdrStandard ddrStandard,
-        IFormFactor formFactor,
+        Chipset chipset,
+        DdrStandard ddrStandard,
+        FormFactor formFactor,
         Bios bios,
-        IWifiModule? wifiModule)
+        WifiModule? wifiModule)
     {
         Socket = socket;
         PciLines = pciLines;
@@ -26,15 +26,15 @@ public class Motherboard : IComponent, IPrototype<Motherboard>
         WifiModule = wifiModule;
     }
 
-    public ISocket Socket { get; }
+    public Socket Socket { get; }
     public int PciLines { get; }
     public int SataPorts { get; }
     public int RamSlots { get; }
-    public IChipset Chipset { get; }
-    public IDdrStandard DdrStandard { get; }
-    public IFormFactor FormFactor { get; }
+    public Chipset Chipset { get; }
+    public DdrStandard DdrStandard { get; }
+    public FormFactor FormFactor { get; }
     public Bios Bios { get; }
-    public IWifiModule? WifiModule { get; }
+    public WifiModule? WifiModule { get; }
 
     public Motherboard Clone()
     {
@@ -53,5 +53,18 @@ public class Motherboard : IComponent, IPrototype<Motherboard>
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();
+    }
+
+    public bool Equals(Motherboard other)
+    {
+        return Socket.Equals(other.Socket)
+               && PciLines == other.PciLines
+               && SataPorts == other.SataPorts
+               && RamSlots == other.RamSlots
+               && Chipset.Equals(other.Chipset)
+               && DdrStandard.Equals(other.DdrStandard)
+               && FormFactor.Equals(other.FormFactor)
+               && Bios.Equals(other.Bios)
+               && Equals(WifiModule, other.WifiModule);
     }
 }

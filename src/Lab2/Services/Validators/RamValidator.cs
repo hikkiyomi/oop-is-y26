@@ -8,16 +8,18 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Services.Validators;
 
 public class RamValidator : IValidator
 {
+    private const double Eps = 1e-9;
+
     public BuildResult Validate(PersonalComputer pc)
     {
         if (pc.Ram.Count > pc.Motherboard.RamSlots)
         {
-            return new BuildResult.Incompatible();
+            return new BuildResult.Incompatible("Insufficient places for RAM on motherboard.");
         }
 
         bool misc = pc.Ram.Aggregate(
             true,
-            (current, ram) => current & ram.DdrStandard.Equals(pc.Motherboard.DdrStandard)); // TODO
+            (current, ram) => current & ram.DdrStandard.Equals(pc.Motherboard.DdrStandard));
 
         bool misc1 = pc.Ram.Aggregate(
             false,
@@ -35,7 +37,7 @@ public class RamValidator : IValidator
 
         if (!pc.Motherboard.Chipset.IsXmpCompatible)
         {
-            return new BuildResult.Incompatible();
+            return new BuildResult.Incompatible("Motherboard does not support XMP profiles.");
         }
 
         foreach (Ram ram in pc.Ram)
@@ -45,11 +47,11 @@ public class RamValidator : IValidator
                     false,
                     (current, profile)
                         => current | pc.Cpu.MemoryFrequencies
-                            .Any(freq => Math.Abs(freq - profile.State.Frequency) < 1e-9));
+                            .Any(freq => Math.Abs(freq - profile.State.Frequency) < Eps));
 
             if (!profileExist)
             {
-                return new BuildResult.Incompatible();
+                return new BuildResult.Incompatible("No suitable XMP profile exist.");
             }
         }
 

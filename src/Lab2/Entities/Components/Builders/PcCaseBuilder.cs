@@ -7,12 +7,20 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
 public class PcCaseBuilder : IComponentBuilder
 {
-    private readonly List<IFormFactor> _supportedFormFactors = new List<IFormFactor>();
+    private readonly List<FormFactor> _supportedFormFactors = new List<FormFactor>();
     private Dimensions? _size;
     private Dimensions? _maxGpuSize;
     private Dimensions? _maxCoolingSize;
 
-    public PcCaseBuilder AddSupportedFormFactor(IFormFactor formFactor)
+    public void Reset()
+    {
+        _supportedFormFactors.Clear();
+        _size = null;
+        _maxGpuSize = null;
+        _maxCoolingSize = null;
+    }
+
+    public PcCaseBuilder AddSupportedFormFactor(FormFactor formFactor)
     {
         _supportedFormFactors.Add(formFactor);
 

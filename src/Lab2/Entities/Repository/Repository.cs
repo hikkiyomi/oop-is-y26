@@ -12,15 +12,19 @@ public sealed class Repository
             () => new Repository(Array.Empty<Product>()),
             LazyThreadSafetyMode.ExecutionAndPublication);
 
-    private readonly List<Product> _components;
+    private readonly Dictionary<int, IComponent> _components;
 
-    private Repository(IEnumerable<Product> components)
+    private Repository(IEnumerable<Product> product)
     {
-        _components = components.ToList();
+        _components = product.ToDictionary(
+            components => components.Id,
+            components => components.Component);
     }
 
     public static Repository GetInstance => Instance.Value;
-    public void Add(Product component) => _components.Add(component);
-    public IReadOnlyCollection<Product> GetComponents() => _components.AsReadOnly();
-    public IComponent GetComponent(int id) => _components.First(component => component.Id == id).Component;
+
+    public void Add(Product product)
+        => _components[product.Id] = product.Component;
+
+    public IComponent GetComponent(int id) => _components[id];
 }

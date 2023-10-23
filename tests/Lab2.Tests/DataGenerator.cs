@@ -14,8 +14,17 @@ public class DataGenerator : IEnumerable<object[]>
     public IEnumerator<object[]> GetEnumerator()
     {
         var cpuBuilder = new CpuBuilder();
+        var motherboardBuilder = new MotherboardBuilder();
+        var coolingSystemBuilder = new CoolingSystemBuilder();
+        var ramBuilder = new RamBuilder();
+        var gpuBuilder = new GpuBuilder();
+        var driveFactory = new HddFactory();
+        var pcCaseBuilder = new PcCaseBuilder();
+        var pcBuilder = new PersonalComputerBuilder();
 
-        RepositoryController.Add(1, cpuBuilder
+        RepositoryController.Add(
+            id: 1,
+            cpuBuilder
             .SetSocket(new Am4())
             .SetFrequency(4300)
             .SetCoresAmount(6)
@@ -24,17 +33,16 @@ public class DataGenerator : IEnumerable<object[]>
             .AddSupportedMemoryFrequency(3500)
             .Build());
 
-        var motherboardBuilder = new MotherboardBuilder();
-
-        RepositoryController.Add(2, motherboardBuilder
+        RepositoryController.Add(
+            id: 2,
+            motherboardBuilder
             .SetBios(new Bios(
                 new UefiBios(),
                 "2.1",
                 new[]
                 {
                     RepositoryController
-                        .GetById<Cpu>(1)
-                        .Clone(),
+                        .GetById<Cpu>(1),
                 }))
             .SetChipset(new XmChipset())
             .SetFormFactor(new Atx())
@@ -46,17 +54,17 @@ public class DataGenerator : IEnumerable<object[]>
             .SetSataPortsAmount(6)
             .Build());
 
-        var coolingSystemBuilder = new CoolingSystemBuilder();
-
-        RepositoryController.Add(3, coolingSystemBuilder
+        RepositoryController.Add(
+            id: 3,
+            coolingSystemBuilder
             .SetSize(10, 10, 10)
             .SetMaxTdp(90)
             .AddSocket(new Am4())
             .Build());
 
-        var ramBuilder = new RamBuilder();
-
-        RepositoryController.Add(4, ramBuilder
+        RepositoryController.Add(
+            id: 4,
+            ramBuilder
             .SetMemory(16)
             .AddSupportedState(3500.0, 30)
             .SetFormFactor(new Dimm())
@@ -64,9 +72,9 @@ public class DataGenerator : IEnumerable<object[]>
             .SetVoltage(30)
             .Build());
 
-        var gpuBuilder = new GpuBuilder();
-
-        RepositoryController.Add(5, gpuBuilder
+        RepositoryController.Add(
+            id: 5,
+            gpuBuilder
             .SetSize(10, 20, 10)
             .SetMemory(4000)
             .SetPciVersion("3.0")
@@ -74,23 +82,50 @@ public class DataGenerator : IEnumerable<object[]>
             .SetVoltage(90)
             .Build());
 
-        var driveFactory = new HddFactory();
-
-        RepositoryController.Add(6, driveFactory
+        RepositoryController.Add(
+            id: 6,
+            driveFactory
             .Create(7000, 1024, 30));
 
-        var pcCaseBuilder = new PcCaseBuilder();
-
-        RepositoryController.Add(7, pcCaseBuilder
+        RepositoryController.Add(
+            id: 7,
+            pcCaseBuilder
             .SetSize(100, 100, 100)
             .SetMaxGpuSize(50, 50, 50)
             .SetMaxCoolingSystemSize(20, 20, 20)
             .AddSupportedFormFactor(new Atx())
             .Build());
 
-        RepositoryController.Add(8, new PowerSupply(500));
+        RepositoryController.Add(
+            id: 8,
+            new PowerSupply(500));
 
-        var pcBuilder = new PersonalComputerBuilder();
+        coolingSystemBuilder.Reset();
+
+        RepositoryController.Add(
+            id: 1337,
+            coolingSystemBuilder
+                .SetSize(10, 10, 10)
+                .SetMaxTdp(50)
+                .AddSocket(new Am4())
+                .Build());
+
+        RepositoryController.Add(
+            id: 42,
+            new PowerSupply(150));
+
+        cpuBuilder.Reset();
+
+        RepositoryController.Add(
+            id: 314,
+            cpuBuilder
+            .SetSocket(new Fm1())
+            .SetFrequency(3000)
+            .SetCoresAmount(4)
+            .SetTdp(100)
+            .SetVoltage(70)
+            .AddSupportedMemoryFrequency(2000)
+            .Build());
 
         yield return new object[]
         {
@@ -105,8 +140,5 @@ public class DataGenerator : IEnumerable<object[]>
         };
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

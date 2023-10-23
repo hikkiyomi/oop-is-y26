@@ -1,10 +1,10 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts.ConcreteParts;
 
-public class BigWifi : IWifiModule
+public record BigWifi : WifiModule
 {
-    public string Name => "BigWifi";
-    public int Voltage => 50;
-    public IWifiStandard Standard => new Wifi50();
-    public bool HasBluetooth => true;
-    public string PciVersion => "3.0";
+    public override string Name => "BigWifi";
+    public override int Voltage => 50;
+    public override WifiStandard Standard => new Wifi50();
+    public override bool HasBluetooth => true;
+    public override string PciVersion => "3.0";
 }

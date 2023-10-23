@@ -12,8 +12,8 @@ public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
     public Cpu(
         double frequency,
         int cores,
-        ISocket socket,
-        IGraphicsCore? graphicsCore,
+        Socket socket,
+        GraphicsCore? graphicsCore,
         IEnumerable<double> supportedMemoryFrequencies,
         int tdp,
         int voltage)
@@ -29,8 +29,8 @@ public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
 
     public double Frequency { get; }
     public int Cores { get; }
-    public ISocket Socket { get; }
-    public IGraphicsCore? GraphicsCore { get; }
+    public Socket Socket { get; }
+    public GraphicsCore? GraphicsCore { get; }
     public IReadOnlyCollection<double> MemoryFrequencies => _supportedMemoryFrequencies.AsReadOnly();
     public int Tdp { get; }
     public int Voltage { get; }
@@ -57,8 +57,8 @@ public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
         return _supportedMemoryFrequencies.SequenceEqual(other._supportedMemoryFrequencies)
                && Frequency.Equals(other.Frequency)
                && Cores == other.Cores
-               && Socket.Equals(other.Socket) // TODO
-               && Equals(GraphicsCore, other.GraphicsCore) // TODO
+               && Socket.Equals(other.Socket)
+               && Equals(GraphicsCore, other.GraphicsCore)
                && Tdp == other.Tdp
                && Voltage == other.Voltage;
     }

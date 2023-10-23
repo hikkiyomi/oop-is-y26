@@ -11,6 +11,15 @@ public class GpuBuilder : IComponentBuilder
     private double? _frequency;
     private int? _voltage;
 
+    public void Reset()
+    {
+        _size = null;
+        _memory = null;
+        _pciVersion = null;
+        _frequency = null;
+        _voltage = null;
+    }
+
     public GpuBuilder SetSize(int length, int width, int height)
     {
         _size = new Dimensions(length, width, height);

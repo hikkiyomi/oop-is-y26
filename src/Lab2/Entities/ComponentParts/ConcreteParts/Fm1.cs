@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts.ConcreteParts;
 
-public record Atx : FormFactor
+public record Fm1() : Socket
 {
-    public override string Name => "ATX";
+    public override string Name => "FM1";
 }

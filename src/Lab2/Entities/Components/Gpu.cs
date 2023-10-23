@@ -43,4 +43,13 @@ public class Gpu
     {
         return Clone();
     }
+
+    public bool Equals(Gpu other)
+    {
+        return Size.Equals(other.Size)
+               && Memory.Equals(other.Memory)
+               && PciVersion == other.PciVersion
+               && Frequency.Equals(other.Frequency)
+               && Voltage == other.Voltage;
+    }
 }

@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Common.Exceptions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 
-public class RamTimings
+public record RamTimings
 {
     public RamTimings(int cl, int trcd, int trp, int tras)
     {

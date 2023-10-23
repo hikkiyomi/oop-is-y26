@@ -34,4 +34,10 @@ public class XmpProfile : IComponent, IPrototype<XmpProfile>
     {
         return Clone();
     }
+
+    public bool Equals(XmpProfile other)
+    {
+        return Timings == other.Timings
+               && State == other.State;
+    }
 }

@@ -18,8 +18,8 @@ public class Ram
         double memory,
         IEnumerable<RamState> supportedStates,
         IEnumerable<XmpProfile> profiles,
-        IFormFactor formFactor,
-        IDdrStandard ddrStandard,
+        FormFactor formFactor,
+        DdrStandard ddrStandard,
         int voltage)
     {
         Memory = memory;
@@ -33,8 +33,8 @@ public class Ram
     public double Memory { get; }
     public IReadOnlyCollection<RamState> SupportedStates => _supportedStates.AsReadOnly();
     public IReadOnlyCollection<XmpProfile> Profiles => _profiles.AsReadOnly();
-    public IFormFactor FormFactor { get; }
-    public IDdrStandard DdrStandard { get; }
+    public FormFactor FormFactor { get; }
+    public DdrStandard DdrStandard { get; }
     public int Voltage { get; }
 
     public Ram Clone()

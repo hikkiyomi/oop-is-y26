@@ -12,9 +12,14 @@ public class CaseValidator : IValidator
         bool coolerStatement = IsLess(pc.CoolingSystem.Size, pc.PcCase.MaxCoolingSize);
         bool gpuStatement = pc.Gpus.Aggregate(true, (current, gpu) => current & IsLess(gpu.Size, pc.PcCase.MaxGpuSize));
 
-        return coolerStatement && gpuStatement
+        if (!coolerStatement)
+        {
+            return new BuildResult.Incompatible("Case is not compatible with cooler.");
+        }
+
+        return gpuStatement
             ? new BuildResult.Success()
-            : new BuildResult.Incompatible();
+            : new BuildResult.Incompatible("Case is not compatible with GPU.");
     }
 
     private static bool IsLess(Dimensions dimensions1, Dimensions dimensions2)

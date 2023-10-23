@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Drives.Factori
 
 public class HddFactory : DriveFactory
 {
-    private readonly IDriveConnection _connection = new SataConnection("SATA");
+    private readonly IDriveConnection _connection = new SataConnection();
 
     public override IDrive Create(
         int primarySpeedInfo,

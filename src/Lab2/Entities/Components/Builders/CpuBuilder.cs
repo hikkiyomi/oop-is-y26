@@ -9,10 +9,21 @@ public class CpuBuilder : IComponentBuilder
     private readonly List<double> _supportedMemoryFrequencies = new List<double>();
     private double? _frequency;
     private int? _cores;
-    private ISocket? _socket;
-    private IGraphicsCore? _graphicsCore;
+    private Socket? _socket;
+    private GraphicsCore? _graphicsCore;
     private int? _tdp;
     private int? _voltage;
+
+    public void Reset()
+    {
+        _supportedMemoryFrequencies.Clear();
+        _frequency = null;
+        _cores = null;
+        _socket = null;
+        _graphicsCore = null;
+        _tdp = null;
+        _voltage = null;
+    }
 
     public CpuBuilder AddSupportedMemoryFrequency(double frequency)
     {
@@ -35,14 +46,14 @@ public class CpuBuilder : IComponentBuilder
         return this;
     }
 
-    public CpuBuilder SetSocket(ISocket socket)
+    public CpuBuilder SetSocket(Socket socket)
     {
         _socket = socket;
 
         return this;
     }
 
-    public CpuBuilder SetGraphicsCore(IGraphicsCore graphicsCore)
+    public CpuBuilder SetGraphicsCore(GraphicsCore graphicsCore)
     {
         _graphicsCore = graphicsCore;
 
