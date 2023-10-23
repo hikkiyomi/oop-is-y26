@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
-public class PcCaseBuilder
+public class PcCaseBuilder : IComponentBuilder
 {
     private readonly List<IFormFactor> _supportedFormFactors = new List<IFormFactor>();
     private Dimensions? _size;
@@ -40,7 +40,7 @@ public class PcCaseBuilder
         return this;
     }
 
-    public PcCase Build()
+    public IComponent Build()
     {
         return new PcCase(
             _size ?? throw new PcCaseValidationException("PC Case should have sizes."),

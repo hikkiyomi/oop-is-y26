@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
-public class MotherboardBuilder
+public class MotherboardBuilder : IComponentBuilder
 {
     private ISocket? _socket;
     private int? _pciLines;
@@ -78,7 +78,7 @@ public class MotherboardBuilder
         return this;
     }
 
-    public Motherboard Build()
+    public IComponent Build()
     {
         return new Motherboard(
             _socket ?? throw new MotherboardValidationException("Motherboard should have a socket."),

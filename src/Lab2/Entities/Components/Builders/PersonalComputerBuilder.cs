@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Services.Validators;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
-public class PersonalComputerBuilder
+public class PersonalComputerBuilder : IPcBuilder
 {
     private readonly List<Gpu> _gpus = new List<Gpu>();
     private readonly List<IDrive> _drives = new List<IDrive>();

@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
-public class GpuBuilder
+public class GpuBuilder : IComponentBuilder
 {
     private Dimensions? _size;
     private double? _memory;
@@ -46,7 +46,7 @@ public class GpuBuilder
         return this;
     }
 
-    public Gpu Build()
+    public IComponent Build()
     {
         return new Gpu(
             _size ?? throw new GpuValidationException("GPU should have sizes."),

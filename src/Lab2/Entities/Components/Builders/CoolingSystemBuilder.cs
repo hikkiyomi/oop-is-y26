@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
-public class CoolingSystemBuilder
+public class CoolingSystemBuilder : IComponentBuilder
 {
     private readonly List<ISocket> _supportedSockets = new List<ISocket>();
     private Dimensions? _size;
@@ -35,7 +35,7 @@ public class CoolingSystemBuilder
         return this;
     }
 
-    public CoolingSystem Build()
+    public IComponent Build()
     {
         return new CoolingSystem(
             _size ?? throw new CoolingSystemValidationException("Cooling system should have sizes"),

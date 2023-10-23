@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
-public class RamBuilder
+public class RamBuilder : IComponentBuilder
 {
     private readonly List<RamState> _supportedStates = new List<RamState>();
     private readonly List<XmpProfile> _profiles = new List<XmpProfile>();
@@ -62,7 +62,7 @@ public class RamBuilder
         return this;
     }
 
-    public Ram Build()
+    public IComponent Build()
     {
         return new Ram(
             _memory ?? throw new RamValidationException("RAM should have memory assigned."),

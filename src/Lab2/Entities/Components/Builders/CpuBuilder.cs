@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Builders;
 
-public class CpuBuilder
+public class CpuBuilder : IComponentBuilder
 {
     private readonly List<double> _supportedMemoryFrequencies = new List<double>();
     private double? _frequency;
@@ -63,7 +63,7 @@ public class CpuBuilder
         return this;
     }
 
-    public Cpu Build()
+    public IComponent Build()
     {
         return new Cpu(
             _frequency ?? throw new CpuValidationException("CPU should have a frequency"),
