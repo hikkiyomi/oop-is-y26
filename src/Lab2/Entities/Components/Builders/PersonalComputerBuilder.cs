@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.Common;
 using Itmo.ObjectOrientedProgramming.Lab2.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Components.Drives;
 using Itmo.ObjectOrientedProgramming.Lab2.Services.Validators;
@@ -99,7 +100,10 @@ public class PersonalComputerBuilder : IPcBuilder
             _powerSupply ?? throw new PcValidationException("PC should have a power supply."));
 
         var validator = new ComputerValidator();
+        BuildResult result = validator.Validate(pc);
 
-        return new ComputerBuildOutcome(pc, validator.Validate(pc));
+        return new ComputerBuildOutcome(
+            result is BuildResult.Success ? pc : null,
+            validator.Validate(pc));
     }
 }

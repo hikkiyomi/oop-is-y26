@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Itmo.ObjectOrientedProgramming.Lab2.Common.Exceptions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Repository;
 
@@ -24,7 +25,24 @@ public sealed class Repository
     public static Repository GetInstance => Instance.Value;
 
     public void Add(Product product)
-        => _components[product.Id] = product.Component;
+    {
+        if (product.Id <= 0)
+        {
+            throw new RepositoryException(
+                "Trying to add a component with improper id.");
+        }
 
-    public IComponent GetComponent(int id) => _components[id];
+        _components[product.Id] = product.Component;
+    }
+
+    public IComponent GetComponent(int id)
+    {
+        if (id <= 0)
+        {
+            throw new RepositoryException(
+                "Trying to access a component with improper id.");
+        }
+
+        return _components[id];
+    }
 }

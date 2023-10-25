@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Common;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
@@ -19,18 +20,9 @@ public class ComputerValidator : IValidator
 
     public BuildResult Validate(PersonalComputer pc)
     {
-        BuildResult? totalResult = null;
-
-        foreach (IValidator validator in _validators)
-        {
-            BuildResult result = validator.Validate(pc);
-
-            if (totalResult is null
-                || totalResult.Priority < result.Priority)
-            {
-                totalResult = result;
-            }
-        }
+        BuildResult? totalResult = _validators
+            .Select(validator => validator.Validate(pc))
+            .MaxBy(validator => validator.Priority);
 
         return totalResult ?? new BuildResult.Success();
     }
