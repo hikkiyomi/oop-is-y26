@@ -2,9 +2,11 @@ using Itmo.ObjectOrientedProgramming.Lab2.Common.Exceptions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Repository;
 
-public static class RepositoryController
+public class RepositoryController
 {
-    public static void Add(int id, IComponent component)
+    private readonly Repository _repository = Repository.GetInstance;
+
+    public void Add(int id, IComponent component)
     {
         if (id <= 0)
         {
@@ -12,13 +14,13 @@ public static class RepositoryController
                 "Trying to add a component with improper id.");
         }
 
-        Repository.GetInstance.Add(new Product(id, component));
+        _repository.Add(new Product(id, component));
     }
 
-    public static T GetById<T>(int id)
+    public T GetById<T>(int id)
         where T : class, IComponent
     {
-        IComponent component = Repository.GetInstance.GetComponent(id);
+        IComponent component = _repository.GetComponent(id);
         var queryResult = component as T;
 
         return queryResult ?? throw new RepositoryException("The component with provided id has another type.");
