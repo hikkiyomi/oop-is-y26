@@ -16,8 +16,11 @@ public static class RepositoryController
     }
 
     public static T GetById<T>(int id)
-        where T : IPrototype<T>
+        where T : class, IComponent
     {
-        return (T)Repository.GetInstance.GetComponent(id).Clone();
+        IComponent component = Repository.GetInstance.GetComponent(id);
+        var queryResult = component as T;
+
+        return queryResult ?? throw new RepositoryException("The component with provided id has another type.");
     }
 }

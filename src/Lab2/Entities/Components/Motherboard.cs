@@ -50,6 +50,11 @@ public class Motherboard : IComponent, IPrototype<Motherboard>
             WifiModule);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();

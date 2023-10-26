@@ -48,6 +48,11 @@ public class Ram
             Voltage);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();

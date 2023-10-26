@@ -52,4 +52,9 @@ public class Gpu
                && Frequency.Equals(other.Frequency)
                && Voltage == other.Voltage;
     }
+
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
 }

@@ -40,6 +40,11 @@ public class PcCase
             _supportedFormFactors);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();

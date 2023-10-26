@@ -34,6 +34,11 @@ public class Ssd : IDrive, IPrototype<Ssd>
             Voltage);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IDrive IPrototype<IDrive>.Clone()
     {
         return Clone();

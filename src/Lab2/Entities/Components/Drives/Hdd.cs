@@ -32,6 +32,11 @@ public class Hdd : IDrive, IPrototype<Hdd>
             Voltage);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IDrive IPrototype<IDrive>.Clone()
     {
         return Clone();

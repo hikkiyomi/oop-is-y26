@@ -30,6 +30,11 @@ public class XmpProfile : IComponent, IPrototype<XmpProfile>
             State.Voltage);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();

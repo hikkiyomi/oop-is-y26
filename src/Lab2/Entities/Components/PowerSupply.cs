@@ -14,6 +14,11 @@ public class PowerSupply : IComponent, IPrototype<PowerSupply>
         return new PowerSupply(MaxVoltage);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();

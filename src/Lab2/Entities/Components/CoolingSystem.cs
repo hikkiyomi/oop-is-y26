@@ -29,6 +29,11 @@ public class CoolingSystem : IComponent, IPrototype<CoolingSystem>, ISized
             MaxTdp);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();

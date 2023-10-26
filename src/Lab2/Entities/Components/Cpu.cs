@@ -5,7 +5,10 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.ComponentParts;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Components;
 
-public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
+public class Cpu :
+    IComponent,
+    IPrototype<Cpu>,
+    IPowerConsuming
 {
     private readonly IList<double> _supportedMemoryFrequencies;
 
@@ -45,6 +48,11 @@ public class Cpu : IComponent, IPrototype<Cpu>, IPowerConsuming
             _supportedMemoryFrequencies,
             Tdp,
             Voltage);
+    }
+
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
     }
 
     IComponent IPrototype<IComponent>.Clone()

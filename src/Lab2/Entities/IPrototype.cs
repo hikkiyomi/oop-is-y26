@@ -1,7 +1,7 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
-public interface IPrototype<out T> // TODO: Better interface for this. Also for repository controller.
-    where T : IPrototype<T>
+public interface IPrototype<out T> : IPrototypeBase
+    where T : IPrototypeBase
 {
-    T Clone();
+    new T Clone();
 }

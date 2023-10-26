@@ -27,6 +27,11 @@ public class Bios : IComponent, IPrototype<Bios>
             SupportedCpu);
     }
 
+    IPrototypeBase IPrototypeBase.Clone()
+    {
+        return Clone();
+    }
+
     IComponent IPrototype<IComponent>.Clone()
     {
         return Clone();
