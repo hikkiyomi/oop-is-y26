@@ -9,15 +9,8 @@ public class DriveValidator : IValidator
 {
     public BuildResult Validate(PersonalComputer pc)
     {
-        int sataConnections = pc.Drives
-            .Where(drive => drive.Connection is SataConnection)
-            .ToList()
-            .Count;
-
-        int pciConnections = pc.Drives
-            .Where(drive => drive.Connection is PciConnection)
-            .ToList()
-            .Count;
+        int sataConnections = pc.Drives.Count(drive => drive.Connection is SataConnection);
+        int pciConnections = pc.Drives.Count(drive => drive.Connection is PciConnection);
 
         if (pc.Motherboard.SataPorts < sataConnections)
         {

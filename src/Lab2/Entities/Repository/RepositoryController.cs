@@ -17,7 +17,7 @@ public class RepositoryController
         _repository.Add(new Product(id, component));
     }
 
-    public T GetById<T>(int id)
+    public T GetComponentById<T>(int id)
         where T : class, IComponent
     {
         IComponent? component = _repository.FindComponentById(id);

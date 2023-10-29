@@ -17,20 +17,19 @@ public class RamValidator : IValidator
             return new BuildResult.Incompatible("Insufficient places for RAM on motherboard.");
         }
 
-        bool misc = pc.Ram.Aggregate(
-            true,
-            (current, ram) => current & ram.DdrStandard.Equals(pc.Motherboard.DdrStandard));
-
-        bool misc1 = pc.Ram.Aggregate(
-            false,
-            (current1, ram)
-                => ram.SupportedStates.Aggregate(
-                    current1,
-                    (current, state)
-                        => current | pc.Motherboard.Chipset.AvailableFrequencies
-                            .Any(freq => freq <= state.Frequency)));
-
-        if (misc && misc1)
+        if (pc.Ram.Aggregate(
+                true,
+                (currentState, ram)
+                    => currentState && ram.DdrStandard.Equals(pc.Motherboard.DdrStandard))
+            &&
+            pc.Ram.Aggregate(
+                false,
+                (currentState, ram)
+                    => ram.SupportedStates.Aggregate(
+                        currentState,
+                        (innerState, state)
+                            => innerState || pc.Motherboard.Chipset.AvailableFrequencies
+                                .Any(freq => freq <= state.Frequency))))
         {
             return new BuildResult.Success();
         }
