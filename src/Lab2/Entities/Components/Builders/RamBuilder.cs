@@ -74,12 +74,16 @@ public class RamBuilder : IComponentBuilder
 
     public IComponent Build()
     {
-        return new Ram(
+        var ram = new Ram(
             _memory ?? throw new RamValidationException("RAM should have memory assigned."),
             _supportedStates,
             _profiles,
             _formFactor ?? throw new RamValidationException("RAM should have form factor assigned."),
             _ddrStandard ?? throw new RamValidationException("RAM should have DDR standard assigned."),
             _voltage ?? throw new RamValidationException("RAM should have voltage assigned."));
+
+        Reset();
+
+        return ram;
     }
 }

@@ -50,10 +50,14 @@ public class PcCaseBuilder : IComponentBuilder
 
     public IComponent Build()
     {
-        return new PcCase(
+        var pcCase = new PcCase(
             _size ?? throw new PcCaseValidationException("PC Case should have sizes."),
             _maxGpuSize ?? throw new PcCaseValidationException("PC Case should have a maximum GPU sizes."),
             _maxCoolingSize ?? throw new PcCaseValidationException("PC Case should have a maximum cooling system sizes."),
             _supportedFormFactors);
+
+        Reset();
+
+        return pcCase;
     }
 }

@@ -106,8 +106,6 @@ public class Tests
             id: 8,
             new PowerSupply(500));
 
-        coolingSystemBuilder.Reset();
-
         _controller.Add(
             id: 1337,
             coolingSystemBuilder
@@ -119,8 +117,6 @@ public class Tests
         _controller.Add(
             id: 42,
             new PowerSupply(150));
-
-        cpuBuilder.Reset();
 
         _controller.Add(
             id: 314,

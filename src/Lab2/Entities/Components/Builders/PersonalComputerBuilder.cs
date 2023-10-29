@@ -102,6 +102,8 @@ public class PersonalComputerBuilder : IPcBuilder
         var validator = new ComputerValidator();
         BuildResult result = validator.Validate(pc);
 
+        Reset();
+
         return new ComputerBuildOutcome(
             result is BuildResult.Success ? pc : null,
             validator.Validate(pc));

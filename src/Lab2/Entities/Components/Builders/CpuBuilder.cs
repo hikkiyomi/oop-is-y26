@@ -76,7 +76,7 @@ public class CpuBuilder : IComponentBuilder
 
     public IComponent Build()
     {
-        return new Cpu(
+        var cpu = new Cpu(
             _frequency ?? throw new CpuValidationException("CPU should have a frequency"),
             _cores ?? throw new CpuValidationException("CPU should have at least one core"),
             _socket ?? throw new CpuValidationException("CPU should have a socket"),
@@ -84,5 +84,9 @@ public class CpuBuilder : IComponentBuilder
             _supportedMemoryFrequencies,
             _tdp ?? throw new CpuValidationException("CPU should have a TDP"),
             _voltage ?? throw new CpuValidationException("CPU should have a voltage"));
+
+        Reset();
+
+        return cpu;
     }
 }

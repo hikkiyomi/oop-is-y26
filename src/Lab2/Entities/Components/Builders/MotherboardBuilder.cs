@@ -93,7 +93,7 @@ public class MotherboardBuilder : IComponentBuilder
 
     public IComponent Build()
     {
-        return new Motherboard(
+        var motherboard = new Motherboard(
             _socket ?? throw new MotherboardValidationException("Motherboard should have a socket."),
             _pciLines ?? throw new MotherboardValidationException("Motherboard should have at least one PCI-E line."),
             _sataPorts ?? throw new MotherboardValidationException("Motherboard should have at least one SATA port."),
@@ -103,5 +103,9 @@ public class MotherboardBuilder : IComponentBuilder
             _formFactor ?? throw new MotherboardValidationException("Motherboard should have a form factor"),
             _bios ?? throw new MotherboardValidationException("Motherboard should have a BIOS"),
             _wifiModule);
+
+        Reset();
+
+        return motherboard;
     }
 }

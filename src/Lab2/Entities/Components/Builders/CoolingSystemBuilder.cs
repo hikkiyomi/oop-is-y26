@@ -44,9 +44,13 @@ public class CoolingSystemBuilder : IComponentBuilder
 
     public IComponent Build()
     {
-        return new CoolingSystem(
+        var coolingSystem = new CoolingSystem(
             _size ?? throw new CoolingSystemValidationException("Cooling system should have sizes"),
             _supportedSockets,
             _maxTdp ?? throw new CoolingSystemValidationException("Cooling system should have a maximum TDP"));
+
+        Reset();
+
+        return coolingSystem;
     }
 }
