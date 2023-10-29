@@ -22,7 +22,14 @@ public sealed class Repository
             components => components.Component);
     }
 
-    public static Repository GetInstance => Instance.Value;
+#pragma warning disable CA1024
+    // Следующий код попадает под CA1024: Use properties where appropriate
+    // Анализатор кода не даёт сделать это методом, потому что
+    // GetInstance() не принимает аргументы и не возвращает какой-либо массив.
+    // Поэтому единственный выход написать здесь метод, а не проперти -
+    // это засуппрессить CA1024.
+    public static Repository GetInstance() => Instance.Value;
+#pragma warning restore CA1024
 
     public void Add(Product product)
     {
@@ -32,10 +39,16 @@ public sealed class Repository
                 "Trying to add a component with improper id.");
         }
 
+        if (_components.ContainsKey(product.Id))
+        {
+            throw new RepositoryException(
+                "Trying to add a component with occupied id.");
+        }
+
         _components[product.Id] = product.Component;
     }
 
-    public IComponent GetComponent(int id)
+    public IComponent? FindComponentById(int id)
     {
         if (id <= 0)
         {
@@ -43,6 +56,8 @@ public sealed class Repository
                 "Trying to access a component with improper id.");
         }
 
-        return _components[id];
+        return _components.TryGetValue(id, out IComponent? component)
+            ? component
+            : null;
     }
 }

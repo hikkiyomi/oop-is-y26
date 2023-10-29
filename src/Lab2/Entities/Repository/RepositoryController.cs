@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Repository;
 
 public class RepositoryController
 {
-    private readonly Repository _repository = Repository.GetInstance;
+    private readonly Repository _repository = Repository.GetInstance();
 
     public void Add(int id, IComponent component)
     {
@@ -20,9 +20,15 @@ public class RepositoryController
     public T GetById<T>(int id)
         where T : class, IComponent
     {
-        IComponent component = _repository.GetComponent(id);
-        var queryResult = component as T;
+        IComponent? component = _repository.FindComponentById(id);
 
-        return queryResult ?? throw new RepositoryException("The component with provided id has another type.");
+        if (component is null)
+        {
+            throw new RepositoryException(
+                "There is no component in repository with such id.");
+        }
+
+        return component as T
+               ?? throw new RepositoryException("The component with provided id has another type.");
     }
 }
