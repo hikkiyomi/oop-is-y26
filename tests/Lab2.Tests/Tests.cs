@@ -13,6 +13,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
 public class Tests
 {
+    // Конструктор контроллера не принимает аргументы, потому что
+    // он работает с синглтоновым репозиторием.
+    // Все контроллеры будут отсылаться на один репозиторий. Так задумано.
     private readonly RepositoryController _controller = new RepositoryController();
     private readonly ComputerBuildOutcome _workingComputerBuildOutcome;
 
