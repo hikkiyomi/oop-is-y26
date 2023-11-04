@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.Services.DeliveryServices;
+using Itmo.ObjectOrientedProgramming.Lab3.Services.Loggers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Addressees;
 
@@ -13,13 +16,26 @@ public class GroupAddressee : IAddressee
         _children = children.ToList();
     }
 
-    public IReadOnlyCollection<IAddressee> GetChildren() => _children.AsReadOnly();
+    public IMessageDeliveryService? Service => null;
+    public ILogger? Logger => null;
+    public Func<IMessageEndpoint, bool>? Filter => null;
 
-    public void Add(IAddressee addressee)
-        => _children.Add(addressee);
+    public IReadOnlyCollection<IAddressee> GetChildren()
+        => _children.AsReadOnly();
 
-    public void Remove(IAddressee addressee)
-        => _children.Remove(addressee);
+    public GroupAddressee Add(IAddressee addressee)
+    {
+        _children.Add(addressee);
+
+        return this;
+    }
+
+    public GroupAddressee Remove(IAddressee addressee)
+    {
+        _children.Remove(addressee);
+
+        return this;
+    }
 
     public void RedirectMessage(Message message)
     {
