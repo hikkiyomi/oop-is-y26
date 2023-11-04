@@ -36,7 +36,10 @@ public class MessengerDeliveryService : IMessageDeliveryService
 
     public void AcceptMessage(Message message)
     {
-        throw new System.NotImplementedException();
+        foreach (IMessageEndpoint endpoint in _endpoints)
+        {
+            endpoint.Interact(message);
+        }
     }
 
     public class ServiceBuilder
