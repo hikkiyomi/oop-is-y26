@@ -1,8 +1,19 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Messengers;
 
-public class Messenger
+public class Messenger : IMessageEndpoint
 {
-    void Print(Message message);
+    public Messenger(int priority)
+    {
+        Priority = priority;
+    }
+
+    public int Priority { get; }
+
+    public void Interact(Message message)
+    {
+        throw new NotImplementedException();
+    }
 }

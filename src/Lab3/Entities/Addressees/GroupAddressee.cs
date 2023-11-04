@@ -1,12 +1,17 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Services.Addressees;
 
 public class GroupAddressee : IAddressee
 {
-    private readonly Collection<IAddressee> _children = new();
+    private readonly List<IAddressee> _children;
+
+    public GroupAddressee(IEnumerable<IAddressee> children)
+    {
+        _children = children.ToList();
+    }
 
     public IReadOnlyCollection<IAddressee> GetChildren() => _children.AsReadOnly();
 
@@ -16,11 +21,11 @@ public class GroupAddressee : IAddressee
     public void Remove(IAddressee addressee)
         => _children.Remove(addressee);
 
-    public void AcceptMessage(Message message)
+    public void RedirectMessage(Message message)
     {
         foreach (IAddressee child in _children)
         {
-            child.AcceptMessage(message);
+            child.RedirectMessage(message);
         }
     }
 }
