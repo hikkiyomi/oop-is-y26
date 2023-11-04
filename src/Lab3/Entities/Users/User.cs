@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Users;
 
 public class User : IMessageEndpoint
 {
-    private readonly HashSet<int> _readMessages = new();
+    private readonly Dictionary<int, bool> _receivedMessages = new();
 
     public User(int priority)
     {
@@ -17,12 +17,29 @@ public class User : IMessageEndpoint
 
     public void Interact(Message message)
     {
-        if (_readMessages.Contains(message.Id))
+        if (_receivedMessages.ContainsKey(message.Id))
         {
-            throw new MessageIsReadException(
-                "Trying to read already seen message.");
+            throw new MessageException(
+                "User already has received the message with given id.");
         }
 
-        _readMessages.Add(message.Id);
+        _receivedMessages[message.Id] = false;
+    }
+
+    public void MarkRead(Message message)
+    {
+        if (!_receivedMessages.TryGetValue(message.Id, out bool isRead))
+        {
+            throw new MessageException(
+                "Trying to mark as read the message that never came to such user.");
+        }
+
+        if (isRead)
+        {
+            throw new MessageException(
+                "Trying to mark as read the message that was already read.");
+        }
+
+        _receivedMessages[message.Id] = true;
     }
 }
