@@ -52,7 +52,7 @@ public sealed class AddresseeBuilder : IAddresseeBuilder
         if (_service is null)
         {
             throw new AddresseeBuilderException(
-                "No service is provided to builder.");
+                "No service was provided to builder.");
         }
 
         if (_filter is not null)
