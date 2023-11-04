@@ -1,5 +1,5 @@
 using System;
-using Itmo.ObjectOrientedProgramming.Lab3.Entities.Addressees;
+using Itmo.ObjectOrientedProgramming.Lab3.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Entities.Users;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 using Xunit;
@@ -13,9 +13,9 @@ public class UserTests
     public void UserReceiveMessageShouldBeUnread(
         Message message,
         User user,
-        StandaloneAddressee addressee)
+        Topic topic)
     {
-        addressee.RedirectMessage(message);
+        topic.SendMessage(message);
 
         Assert.False(user.IsRead(message));
     }
@@ -25,9 +25,9 @@ public class UserTests
     public void UserReceiveMessageAndReadShouldBeOk(
         Message message,
         User user,
-        StandaloneAddressee addressee)
+        Topic topic)
     {
-        addressee.RedirectMessage(message);
+        topic.SendMessage(message);
 
         Exception? exception = Record.Exception(() =>
         {
@@ -43,9 +43,9 @@ public class UserTests
     public void UserReceiveMessageAndReadTwiceShouldBeBad(
         Message message,
         User user,
-        StandaloneAddressee addressee)
+        Topic topic)
     {
-        addressee.RedirectMessage(message);
+        topic.SendMessage(message);
         user.MarkRead(message);
 
         Exception? exception = Record.Exception(() =>

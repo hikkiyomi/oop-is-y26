@@ -23,11 +23,13 @@ public class UserTestsGenerator : IEnumerable<object[]>
                     .Build())
                 .Build();
 
+        var topic = new Topic("TopicName", addressee);
+
         yield return new object[]
         {
             messageFactory.Create("Hello", "World"),
             user,
-            addressee,
+            topic,
         };
     }
 

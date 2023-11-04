@@ -40,7 +40,9 @@ public class MiscellaneousTests
                 .SetFilter(filter)
                 .Build();
 
-        addressee.RedirectMessage(messageFactory.Create("This will not", "be received"));
+        var topic = new Topic("VERY COOL TOPIC WOW SUCH USEFUL MANY STYLE", addressee);
+
+        topic.SendMessage(messageFactory.Create("This will not", "be received"));
 
         Assert.False(filter.Received(1).Invoke(messenger));
     }
@@ -68,7 +70,9 @@ public class MiscellaneousTests
                 .SetLogger(logger)
                 .Build();
 
-        addressee.RedirectMessage(messageFactory.Create("He", "y"));
+        var topic = new Topic("VERY COOL TOPIC WOW SUCH USEFUL MANY STYLE", addressee);
+
+        topic.SendMessage(messageFactory.Create("He", "y"));
 
         logger.Received(1).Log("Hey");
     }
@@ -100,7 +104,9 @@ public class MiscellaneousTests
                     .Build())
                 .Build();
 
-        addressee.RedirectMessage(messageFactory.Create("Hello!", "End Test"));
+        var topic = new Topic("VERY COOL TOPIC WOW SUCH USEFUL MANY STYLE", addressee);
+
+        topic.SendMessage(messageFactory.Create("Hello!", "End Test"));
 
         Assert.Equal(1, counter);
         Assert.Equal("[Messenger Cool]:\nHead: Hello!\nBody: End Test", messenger.FormText(message));
