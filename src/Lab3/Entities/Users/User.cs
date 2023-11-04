@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Users;
 
 public class User : IMessageEndpoint
 {
-    private readonly Dictionary<int, bool> _readMessages = new();
+    private readonly HashSet<int> _readMessages = new();
 
     public User(int priority)
     {
@@ -17,12 +17,12 @@ public class User : IMessageEndpoint
 
     public void Interact(Message message)
     {
-        if (_readMessages.ContainsKey(message.Id))
+        if (_readMessages.Contains(message.Id))
         {
             throw new MessageIsReadException(
                 "Trying to read already seen message.");
         }
 
-        _readMessages[message.Id] = true;
+        _readMessages.Add(message.Id);
     }
 }

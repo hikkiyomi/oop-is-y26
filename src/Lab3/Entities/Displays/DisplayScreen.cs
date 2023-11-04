@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Displays;
 public class DisplayScreen : IMessageEndpoint
 {
     private readonly IDisplayDriver _driver;
-    private readonly Color _color;
+    private Color _color;
 
     public DisplayScreen(
         IDisplayDriver driver,
@@ -19,6 +19,11 @@ public class DisplayScreen : IMessageEndpoint
     }
 
     public int Priority { get; }
+
+    public void ChangeColor(Color color)
+    {
+        _color = color;
+    }
 
     public void Interact(Message message)
     {

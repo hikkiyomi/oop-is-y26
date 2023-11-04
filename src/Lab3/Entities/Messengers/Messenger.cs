@@ -14,6 +14,6 @@ public class Messenger : IMessageEndpoint
 
     public void Interact(Message message)
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"[Messenger]: {message}");
     }
 }

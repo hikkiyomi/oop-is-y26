@@ -6,20 +6,20 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Displays;
 
 public class DisplayDriver : IDisplayDriver
 {
-    public Color Color { get; private set; }
+    private Color _color;
 
     public void Clear()
     {
-        throw new NotImplementedException();
+        Console.Clear();
     }
 
     public void ChangeColor(Color color)
     {
-        Color = color;
+        _color = color;
     }
 
     public void Print(Message message)
     {
-        throw new NotImplementedException();
+        Console.WriteLine(Crayon.Output.Rgb(_color.R, _color.G, _color.B).Text(message.ToString()));
     }
 }
