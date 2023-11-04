@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
@@ -9,7 +10,7 @@ public class DisplayDriver : IDisplayDriver
 
     public void Clear()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public void ChangeColor(Color color)
@@ -19,6 +20,6 @@ public class DisplayDriver : IDisplayDriver
 
     public void Print(Message message)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }
