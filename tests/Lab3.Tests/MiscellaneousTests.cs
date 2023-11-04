@@ -104,7 +104,7 @@ public class MiscellaneousTests
                     .Build())
                 .Build();
 
-        var topic = new Topic("VERY COOL TOPIC WOW SUCH USEFUL MANY STYLE", addressee);
+        var topic = new Topic("VERY COOL TOPIC WHY AM I NOT IN GOOGLE TABLE)", addressee);
 
         topic.SendMessage(messageFactory.Create("Hello!", "End Test"));
 
