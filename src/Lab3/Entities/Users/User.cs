@@ -26,7 +26,7 @@ public class User : IMessageEndpoint
         _messageStatuses[message.Id] = false;
     }
 
-    public void MarkRead(Message message)
+    public bool IsRead(Message message)
     {
         if (!_messageStatuses.TryGetValue(message.Id, out bool isRead))
         {
@@ -34,7 +34,12 @@ public class User : IMessageEndpoint
                 "Trying to mark as read the message that never came to such user.");
         }
 
-        if (isRead)
+        return isRead;
+    }
+
+    public void MarkRead(Message message)
+    {
+        if (IsRead(message))
         {
             throw new MessageException(
                 "Trying to mark as read the message that was already read.");
