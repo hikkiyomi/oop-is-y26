@@ -9,9 +9,8 @@ public class MessageFactory
 
     public Message Create(
         string head,
-        string body,
-        int priority)
+        string body)
     {
-        return new Message(_freeId++, head, body, priority);
+        return new Message(_freeId++, head, body);
     }
 }

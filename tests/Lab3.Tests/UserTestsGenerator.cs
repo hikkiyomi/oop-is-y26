@@ -14,19 +14,19 @@ public class UserTestsGenerator : IEnumerable<object[]>
     {
         var messageFactory = new MessageFactory();
         var addresseeBuilder = new AddresseeBuilder();
-        var userEndpoint = new User(priority: 1);
+        var user = new User(priority: 1);
 
         StandaloneAddressee addressee =
             addresseeBuilder
                 .SetService(UserDeliveryService.Builder
-                    .AddEndpoint(userEndpoint)
+                    .AddEndpoint(user)
                     .Build())
                 .Build();
 
         yield return new object[]
         {
-            messageFactory.Create("Hello", "World", 1),
-            userEndpoint,
+            messageFactory.Create("Hello", "World"),
+            user,
             addressee,
         };
     }
