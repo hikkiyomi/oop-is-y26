@@ -3,21 +3,21 @@ using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Entities;
 
-public class Topic
+public class Topic : ITopic
 {
-    private readonly string _name;
-    private readonly IAddressee _addressee;
-
     public Topic(
         string name,
         IAddressee addressee)
     {
-        _name = name;
-        _addressee = addressee;
+        Name = name;
+        Addressee = addressee;
     }
+
+    public string Name { get; }
+    public IAddressee Addressee { get; }
 
     public void SendMessage(Message message)
     {
-        _addressee.RedirectMessage(message);
+        Addressee.RedirectMessage(message);
     }
 }
