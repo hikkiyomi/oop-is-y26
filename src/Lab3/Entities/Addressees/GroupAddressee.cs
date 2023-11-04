@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Services.DeliveryServices;
-using Itmo.ObjectOrientedProgramming.Lab3.Services.Loggers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Addressees;
 
@@ -17,8 +15,6 @@ public class GroupAddressee : IAddressee
     }
 
     public IMessageDeliveryService? Service => null;
-    public ILogger? Logger => null;
-    public Func<IMessageEndpoint, bool>? Filter => null;
 
     public IReadOnlyCollection<IAddressee> GetChildren()
         => _children.AsReadOnly();
