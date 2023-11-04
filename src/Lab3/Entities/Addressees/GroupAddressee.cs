@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Services.Addressees;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Addressees;
 
 public class GroupAddressee : IAddressee
 {

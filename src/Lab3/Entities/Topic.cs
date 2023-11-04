@@ -1,5 +1,5 @@
+using Itmo.ObjectOrientedProgramming.Lab3.Entities.Addressees;
 using Itmo.ObjectOrientedProgramming.Lab3.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.Services.Addressees;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Entities;
 
