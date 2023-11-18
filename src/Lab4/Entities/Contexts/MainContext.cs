@@ -1,6 +1,7 @@
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.TreeComponents;
+using Itmo.ObjectOrientedProgramming.Lab4.Extensions;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.FileSystems;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.OutputModes;
 
@@ -12,6 +13,11 @@ public class MainContext
     {
         FileSystem = fileSystem;
         CurrentPath = currentPath;
+
+        if (!currentPath.IsAbsolute())
+        {
+            throw new PathException("Connection path should be absolute.");
+        }
 
         if (!Directory.Exists(currentPath))
         {
