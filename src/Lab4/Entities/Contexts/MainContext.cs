@@ -1,5 +1,8 @@
 using System;
+using System.IO;
+using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.FileSystems;
+using Itmo.ObjectOrientedProgramming.Lab4.Services.OutputModes;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 
@@ -9,6 +12,11 @@ public class MainContext
     {
         FileSystem = fileSystem;
         CurrentPath = currentPath;
+
+        if (!Directory.Exists(currentPath))
+        {
+            throw new PathException($"There is no directory in given path {currentPath}.");
+        }
     }
 
     public IFileSystem FileSystem { get; }
@@ -19,7 +27,7 @@ public class MainContext
         CurrentPath = path;
     }
 
-    public void List(int depth)
+    public void List(int depth, IOutputMode mode)
     {
         throw new NotImplementedException();
     }
