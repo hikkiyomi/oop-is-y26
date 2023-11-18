@@ -1,6 +1,5 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Builders;
 using Itmo.ObjectOrientedProgramming.Lab4.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Checkers;
@@ -81,16 +80,6 @@ public class ParserChain : ParserChainLinkBase
 
         builder.AddParameterValue(key, value);
         Go(key)?.Handle(ref builder, ref positionals, args, currentArgument + 1);
-    }
-
-    public override IParserChainLink Clone()
-    {
-        return new ParserChain(Name)
-        {
-            Transitions = Transitions.ToDictionary(
-                obj => obj.Key,
-                obj => obj.Value),
-        };
     }
 
     private ParserChain? Go(string transition)

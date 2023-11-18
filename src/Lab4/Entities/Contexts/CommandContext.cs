@@ -24,14 +24,16 @@ public class CommandContext
         Action = action;
         Chain = chain;
 
-        IEnumerable<ParameterContext> transferObjects = dataTransferObjects.ToList();
+        // Анализатор предложил мне сделать копию.
+        // Я согласился, потому что не хочу видеть красную волнистую линию.
+        IEnumerable<ParameterContext> parameterContexts = dataTransferObjects.ToList();
 
-        _contextByFullName = transferObjects
+        _contextByFullName = parameterContexts
             .ToDictionary(
                 dto => dto.FullName,
                 dto => dto);
 
-        foreach (ParameterContext dto in transferObjects
+        foreach (ParameterContext dto in parameterContexts
                      .Where(dto => dto.ShortName is not null))
         {
             // Анализатор заставил меня написать эту строчку.

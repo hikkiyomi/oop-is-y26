@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 // Статика, потому что класс просто содержит статический метод.
 public static class MonoParameterParser
 {
-    // Статика, потому что метод, который ничего не использует из класса. Удивительно?)
+    // Статика, потому что метод, который ничего не использует из класса. Жесть.
     public static MonoParameterResult Parse(string arg)
     {
         string[] result = arg.Split('=');

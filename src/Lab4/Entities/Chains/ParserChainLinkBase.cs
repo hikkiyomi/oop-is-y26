@@ -7,17 +7,20 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.Chains;
 
 public abstract class ParserChainLinkBase : IParserChainLink
 {
+    private Dictionary<string, IParserChainLink> _transitions = new();
+
     protected ParserChainLinkBase(string name)
     {
         Name = name;
     }
 
     public string Name { get; }
-    public Dictionary<string, IParserChainLink> Transitions { get; protected init; } = new();
+    public IReadOnlyDictionary<string, IParserChainLink> Transitions
+        => _transitions.AsReadOnly();
 
     public void AddNext(string transition, IParserChainLink link)
     {
-        Transitions[transition] = link;
+        _transitions[transition] = link;
     }
 
     public abstract void Handle(
@@ -25,8 +28,6 @@ public abstract class ParserChainLinkBase : IParserChainLink
         ref Collection<string> positionals,
         string[] args,
         int currentArgument);
-
-    public abstract IParserChainLink Clone();
 
     public bool Equals(ParserChainLinkBase other)
     {
