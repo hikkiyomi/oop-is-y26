@@ -4,6 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Factories;
 using Itmo.ObjectOrientedProgramming.Lab4.Extensions;
+using Itmo.ObjectOrientedProgramming.Lab4.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
@@ -51,5 +52,10 @@ public class DisconnectedWorkplace : IWorkplaceState
     {
         Action action = _commandParser.Parse(command);
         action.Invoke();
+    }
+
+    public ParseInfoDto GetExecutionInfo(string command)
+    {
+        return _commandParser.FullParse(command);
     }
 }

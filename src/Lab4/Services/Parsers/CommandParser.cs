@@ -63,6 +63,7 @@ public class CommandParser
         return new ParseInfoDto(
             Id: parsedContext.Id,
             Context: contextByFullName,
+            Positionals: _positionals.AsReadOnly(),
             OriginalCommand: existingContext.Action,
             CommandToInvoke: () =>
             {

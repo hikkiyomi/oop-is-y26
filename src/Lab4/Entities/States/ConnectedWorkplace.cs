@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Factories;
+using Itmo.ObjectOrientedProgramming.Lab4.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.OutputModes;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
@@ -147,5 +148,10 @@ public class ConnectedWorkplace : IWorkplaceState
     {
         Action action = _commandParser.Parse(command);
         action.Invoke();
+    }
+
+    public ParseInfoDto GetExecutionInfo(string command)
+    {
+        return _commandParser.FullParse(command);
     }
 }
