@@ -22,6 +22,7 @@ public class DisconnectedWorkplace : IWorkplaceState
             .SetAction(delegate(object[] objects)
             {
                 string[] positionals = (string[])objects[1];
+
                 _workplace.ChangeState(
                     new ConnectedWorkplace(
                         _workplace,

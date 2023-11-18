@@ -40,7 +40,7 @@ public class ParserChain : ParserChainLinkBase
             else if (args[1].Equals(Go(args[1])?.Name, StringComparison.Ordinal))
             {
                 builder.SetActionSignature(args[1]);
-                Go(args[1])?.Go(string.Empty)?.Handle(ref builder, ref positionals, args, currentArgument + 1);
+                Go(args[1])?.Go("parameterNode")?.Handle(ref builder, ref positionals, args, currentArgument + 1);
             }
             else
             {
