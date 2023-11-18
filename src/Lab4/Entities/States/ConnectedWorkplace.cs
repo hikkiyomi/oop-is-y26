@@ -38,7 +38,7 @@ public class ConnectedWorkplace : IWorkplaceState
             {
                 string[] positionals = (string[])objects[1];
 
-                Context.CurrentPath = pathCombiner.Combine(positionals[0]);
+                Context.GoTo(pathCombiner.Combine(positionals[0]));
             })
             .Build());
 
@@ -49,8 +49,13 @@ public class ConnectedWorkplace : IWorkplaceState
             .SetAction(delegate(object[] objects)
             {
                 var dict = (Dictionary<string, string>)objects[0];
+                int depth = dict.TryGetValue("depth", out string? value)
+                    ? int.Parse(
+                        value,
+                        new NumberFormatInfo())
+                    : 1;
 
-                Context.List(int.Parse(dict["depth"], new NumberFormatInfo()));
+                Context.List(depth);
             })
             .Build());
 

@@ -1,6 +1,7 @@
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
+using Itmo.ObjectOrientedProgramming.Lab4.Extensions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Services;
 

@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Services;
+namespace Itmo.ObjectOrientedProgramming.Lab4.Extensions;
 
 public static class StringPathExtension
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Factories;
-using Itmo.ObjectOrientedProgramming.Lab4.Services;
+using Itmo.ObjectOrientedProgramming.Lab4.Extensions;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
