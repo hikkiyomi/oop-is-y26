@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Builders;
 using Itmo.ObjectOrientedProgramming.Lab4.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Checkers;
@@ -53,30 +52,21 @@ public class ParserChain : ParserChainLinkBase
 
         string key;
         string value;
-        int goFrom;
 
         if (type == ArgumentType.MonoParameter)
         {
             MonoParameterResult result = MonoParameterParser.Parse(args[currentArgument]);
             key = result.Key.Split('-', StringSplitOptions.RemoveEmptyEntries)[0];
             value = result.Value;
-            goFrom = currentArgument + 1;
         }
         else
         {
             key = args[currentArgument].Split('-', StringSplitOptions.RemoveEmptyEntries)[0];
-
-            if (currentArgument + 1 >= args.Length)
-            {
-                throw new ParserContextException("Not every argument has its own value.");
-            }
-
-            value = args[currentArgument + 1];
-            goFrom = currentArgument + 2;
+            value = "true";
         }
 
         builder.AddParameterValue(key, value);
-        Go(key)?.Handle(ref builder, ref positionals, args, goFrom);
+        Go(key)?.Handle(ref builder, ref positionals, args, currentArgument + 1);
     }
 
     public override IParserChainLink Clone()

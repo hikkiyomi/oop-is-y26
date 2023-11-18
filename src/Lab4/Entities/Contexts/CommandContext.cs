@@ -66,7 +66,7 @@ public class CommandContext
         return byFullName ?? byShortName;
     }
 
-    public ParameterContext? FindParameterByFullName(string fullName)
+    private ParameterContext? FindParameterByFullName(string fullName)
     {
         return _contextByFullName.TryGetValue(fullName, out ParameterContext? value)
             ? value
@@ -77,7 +77,7 @@ public class CommandContext
     {
         if (shortName.Length != 1)
         {
-            throw new CommandContextException("Short name should be 2 in length.");
+            return null;
         }
 
         if (!_fullNameByShortName.TryGetValue(shortName, out string? value))
