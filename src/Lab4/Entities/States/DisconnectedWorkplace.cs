@@ -11,13 +11,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
 public class DisconnectedWorkplace : IWorkplaceState
 {
     private readonly Workplace _workplace;
-    private readonly Parser _parser = new();
+    private readonly CommandParser _commandParser = new();
 
     public DisconnectedWorkplace(Workplace workplace)
     {
         _workplace = workplace;
 
-        _parser.AddCommand(CommandContext.Builder
+        _commandParser.AddCommand(CommandContext.Builder
             .SetMainSignature("connect")
             .SetActionSignature(string.Empty)
             .AddParameter("m", "mode")
@@ -49,7 +49,7 @@ public class DisconnectedWorkplace : IWorkplaceState
 
     public void Execute(string command)
     {
-        Action action = _parser.Parse(command);
+        Action action = _commandParser.Parse(command);
         action.Invoke();
     }
 }

@@ -10,7 +10,7 @@ using Itmo.ObjectOrientedProgramming.Lab4.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
-public class Parser
+public class CommandParser
 {
     private readonly Dictionary<CommandIdentifier, CommandContext> _context = new();
     private readonly ParserChain _root = new(string.Empty);

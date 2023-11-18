@@ -12,7 +12,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
 public class ConnectedWorkplace : IWorkplaceState
 {
     private readonly Workplace _workplace;
-    private readonly Parser _parser = new();
+    private readonly CommandParser _commandParser = new();
 
     public ConnectedWorkplace(
         Workplace workplace,
@@ -140,12 +140,12 @@ public class ConnectedWorkplace : IWorkplaceState
 
     public void AddCommand(CommandContext context)
     {
-        _parser.AddCommand(context);
+        _commandParser.AddCommand(context);
     }
 
     public void Execute(string command)
     {
-        Action action = _parser.Parse(command);
+        Action action = _commandParser.Parse(command);
         action.Invoke();
     }
 }
