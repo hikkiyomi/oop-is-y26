@@ -21,7 +21,7 @@ public class SingleNode : ITreeNode
 
         for (int i = 0; i < 4 * _height; ++i)
         {
-            message += " ";
+            message += _typeWriter.GetIndent();
         }
 
         message += $"{_typeWriter.GetSymbol()} {_name}";

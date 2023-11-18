@@ -10,4 +10,9 @@ public class DirectoryTypeWriter : ITypeWriter
     {
         return _parser.FindValueByKey("directory") ?? "#";
     }
+
+    public string GetIndent()
+    {
+        return _parser.FindValueByKey("indendation") ?? " ";
+    }
 }

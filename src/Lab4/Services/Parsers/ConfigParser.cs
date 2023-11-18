@@ -14,6 +14,7 @@ public class ConfigParser
         {
             _env["file"] = "-";
             _env["directory"] = "#";
+            _env["indentation"] = " ";
 
             return;
         }

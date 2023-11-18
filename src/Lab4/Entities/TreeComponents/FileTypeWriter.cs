@@ -10,4 +10,9 @@ public class FileTypeWriter : ITypeWriter
     {
         return _parser.FindValueByKey("file") ?? "-";
     }
+
+    public string GetIndent()
+    {
+        return _parser.FindValueByKey("indent") ?? " ";
+    }
 }
