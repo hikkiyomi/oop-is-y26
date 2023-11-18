@@ -66,11 +66,11 @@ public class Parser
 
     // Пометил статикой, потому что метод не использует информацию из класса.
     // Иначе анализатор ругается(
-    private static void AddChain(ParserChain currentRootChain, ParserChain currentCommandChain)
+    private static void AddChain(ParserChain currentRootChain, ParserChainLinkBase currentCommandChain)
     {
         if (!currentRootChain.Transitions.ContainsKey(currentCommandChain.Name))
         {
-            IParserChainLink next = currentCommandChain.Clone();
+            IParserChainLink next = new ParserChain(currentCommandChain.Name);
             currentRootChain.AddNext(currentCommandChain.Name, next);
         }
 

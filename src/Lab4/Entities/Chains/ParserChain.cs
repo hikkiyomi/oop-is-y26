@@ -85,7 +85,7 @@ public class ParserChain : ParserChainLinkBase
         {
             Transitions = Transitions.ToDictionary(
                 obj => obj.Key,
-                obj => obj.Value.Clone()),
+                obj => obj.Value),
         };
     }
 
