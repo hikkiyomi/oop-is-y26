@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Builders;
@@ -15,7 +16,11 @@ public class ParserChain : ParserChainLinkBase
     {
     }
 
-    public override void Handle(ref ArgumentBuilder builder, string[] args, int currentArgument)
+    public override void Handle(
+        ref ArgumentBuilder builder,
+        ref Collection<string> positionals,
+        string[] args,
+        int currentArgument)
     {
         if (currentArgument >= args.Length)
         {
@@ -33,7 +38,14 @@ public class ParserChain : ParserChainLinkBase
             }
 
             builder.SetMainSignature(args[0]);
-            Go(args[0]).Handle(ref builder, args, 1);
+
+            if (args[0].Equals("disconnect", StringComparison.Ordinal))
+            {
+                builder.SetActionSignature(string.Empty);
+                return;
+            }
+
+            Go(args[0]).Handle(ref builder, ref positionals, args, 1);
         }
         else if (currentArgument == 1)
         {
@@ -43,52 +55,44 @@ public class ParserChain : ParserChainLinkBase
             }
 
             builder.SetActionSignature(args[1]);
-            Go(args[1]).Go(string.Empty).Handle(ref builder, args, currentArgument + 1);
+            Go(args[1]).Go(string.Empty).Handle(ref builder, ref positionals, args, currentArgument + 1);
         }
         else
         {
             if (type == ArgumentType.Positional)
             {
-                throw new ParserContextException("Unexpected positional argument.");
+                positionals.Add(args[currentArgument]);
+                Handle(ref builder, ref positionals, args, currentArgument + 1);
+
+                return;
             }
 
             string key;
-            string value = string.Empty;
+            string value;
+            int goFrom;
 
             if (type == ArgumentType.MonoParameter)
             {
                 MonoParameterResult result = MonoParameterParser.Parse(args[currentArgument]);
                 key = result.Key.Split('-', StringSplitOptions.RemoveEmptyEntries)[0];
                 value = result.Value;
+                goFrom = currentArgument + 1;
             }
             else
             {
                 key = args[currentArgument].Split('-', StringSplitOptions.RemoveEmptyEntries)[0];
-            }
 
-            for (; currentArgument < args.Length; ++currentArgument)
-            {
-                ArgumentType currentArgType = checker.Check(args[currentArgument]);
+                if (currentArgument + 1 >= args.Length)
+                {
+                    throw new ParserContextException("Not every argument has its own value.");
+                }
 
-                if (currentArgType == ArgumentType.Positional)
-                {
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        value = args[currentArgument];
-                    }
-                    else
-                    {
-                        value += " " + args[currentArgument];
-                    }
-                }
-                else
-                {
-                    break;
-                }
+                value = args[currentArgument + 1];
+                goFrom = currentArgument + 2;
             }
 
             builder.AddParameterValue(key, value);
-            Go(key).Handle(ref builder, args, currentArgument);
+            Go(key).Handle(ref builder, ref positionals, args, goFrom);
         }
     }
 
@@ -96,13 +100,13 @@ public class ParserChain : ParserChainLinkBase
     {
         return new ParserChain(Name)
         {
-            Transitions = this.Transitions.ToDictionary(
+            Transitions = Transitions.ToDictionary(
                 obj => obj.Key,
                 obj => obj.Value.Clone()),
         };
     }
 
-    public ParserChain Go(string transition)
+    private ParserChain Go(string transition)
     {
         return Transitions.TryGetValue(transition, out IParserChainLink? value)
             ? (ParserChain)value

@@ -14,11 +14,6 @@ public class MainContext
     public IFileSystem FileSystem { get; }
     public string CurrentPath { get; set; }
 
-    public void GoTo(string path)
-    {
-        throw new NotImplementedException();
-    }
-
     public void List(int depth)
     {
         throw new NotImplementedException();

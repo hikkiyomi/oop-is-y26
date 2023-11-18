@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Builders;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.Chains;
@@ -19,7 +20,11 @@ public abstract class ParserChainLinkBase : IParserChainLink
         Transitions[transition] = link;
     }
 
-    public abstract void Handle(ref ArgumentBuilder builder, string[] args, int currentArgument);
+    public abstract void Handle(
+        ref ArgumentBuilder builder,
+        ref Collection<string> positionals,
+        string[] args,
+        int currentArgument);
     public abstract IParserChainLink Clone();
 
     public bool Equals(ParserChainLinkBase other)

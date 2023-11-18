@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Builders;
@@ -13,6 +14,7 @@ public class Parser
 {
     private readonly Dictionary<CommandIdentifier, CommandContext> _context = new();
     private readonly ParserChain _root = new(string.Empty);
+    private Collection<string> _positionals = new();
 
     public void AddCommand(CommandContext context)
     {
@@ -26,12 +28,12 @@ public class Parser
         AddChain(_root, context.Chain);
     }
 
-    public Action<MainContext> Parse(string arguments)
+    public Action Parse(string arguments)
     {
         string[] split = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var argumentBuilder = new ArgumentBuilder();
 
-        _root.Handle(ref argumentBuilder, split, 0);
+        _root.Handle(ref argumentBuilder, ref _positionals, split, 0);
 
         ArgumentContext parsedContext = argumentBuilder.Build();
 
@@ -51,13 +53,13 @@ public class Parser
             throw new ParserContextException($"Unknown parameter {param}");
         }
 
-        return (MainContext context) =>
+        return () =>
         {
             existingContext.Action.Invoke(
                 new object[]
                 {
-                    context,
-                    parsedContext.Parameters.Values,
+                    parsedContext.Parameters,
+                    _positionals.ToArray(),
                 });
         };
     }
