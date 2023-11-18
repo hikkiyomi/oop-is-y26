@@ -34,6 +34,7 @@ public class ConnectedWorkplace : IWorkplaceState
             .SetAction(delegate(object[] objects)
             {
                 string[] positionals = (string[])objects[1];
+
                 Context.CurrentPath = positionals[0];
             })
             .Build());
@@ -45,6 +46,7 @@ public class ConnectedWorkplace : IWorkplaceState
             .SetAction(delegate(object[] objects)
             {
                 var dict = (Dictionary<string, string>)objects[0];
+
                 Context.List(int.Parse(dict["depth"], new NumberFormatInfo()));
             })
             .Build());
@@ -69,6 +71,7 @@ public class ConnectedWorkplace : IWorkplaceState
             .SetAction(delegate(object[] objects)
             {
                 string[] positionals = (string[])objects[1];
+
                 Context.FileSystem.Move(positionals[0], positionals[1]);
             })
             .Build());
@@ -79,6 +82,7 @@ public class ConnectedWorkplace : IWorkplaceState
             .SetAction(delegate(object[] objects)
             {
                 string[] positionals = (string[])objects[1];
+
                 Context.FileSystem.Copy(positionals[0], positionals[1]);
             })
             .Build());
@@ -89,6 +93,7 @@ public class ConnectedWorkplace : IWorkplaceState
             .SetAction(delegate(object[] objects)
             {
                 string[] positionals = (string[])objects[1];
+
                 Context.FileSystem.Delete(positionals[0]);
             })
             .Build());
@@ -99,6 +104,7 @@ public class ConnectedWorkplace : IWorkplaceState
             .SetAction(delegate(object[] objects)
             {
                 string[] positionals = (string[])objects[1];
+
                 Context.FileSystem.Rename(positionals[0], positionals[1]);
             })
             .Build());
