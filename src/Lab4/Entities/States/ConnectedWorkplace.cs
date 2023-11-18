@@ -4,6 +4,7 @@ using System.Globalization;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Factories;
 using Itmo.ObjectOrientedProgramming.Lab4.Services;
+using Itmo.ObjectOrientedProgramming.Lab4.Services.OutputModes;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
@@ -46,16 +47,23 @@ public class ConnectedWorkplace : IWorkplaceState
             .SetMainSignature("tree")
             .SetActionSignature("list")
             .AddParameter("d", "depth")
+            .AddParameter("m", "mode")
             .SetAction(delegate(object[] objects)
             {
                 var dict = (Dictionary<string, string>)objects[0];
-                int depth = dict.TryGetValue("depth", out string? value)
+                OutputModeFactory factory = new();
+
+                int depth = dict.TryGetValue("depth", out string? value1)
                     ? int.Parse(
-                        value,
+                        value1,
                         new NumberFormatInfo())
                     : 1;
 
-                Context.List(depth);
+                IOutputMode mode = dict.TryGetValue("mode", out string? value2)
+                    ? factory.Create(value2)
+                    : new ConsoleMode();
+
+                Context.List(depth, mode);
             })
             .Build());
 

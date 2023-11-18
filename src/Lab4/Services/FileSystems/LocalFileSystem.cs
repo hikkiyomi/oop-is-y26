@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.OutputModes;
@@ -73,7 +72,7 @@ public class LocalFileSystem : IFileSystem
         }
 
         string directoryPath = Path.GetDirectoryName(path)
-                               ?? throw new InvalidOperationException();
+                               ?? throw new PathException($"No directory in path {path}.");
 
         string newPath = Path.Combine(directoryPath, name);
 

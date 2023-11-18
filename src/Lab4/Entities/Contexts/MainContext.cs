@@ -1,6 +1,6 @@
-using System;
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
+using Itmo.ObjectOrientedProgramming.Lab4.Entities.TreeComponents;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.FileSystems;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.OutputModes;
 
@@ -29,6 +29,7 @@ public class MainContext
 
     public void List(int depth, IOutputMode mode)
     {
-        throw new NotImplementedException();
+        var tree = new CompositeNode(CurrentPath, depth, depth);
+        tree.Print(mode);
     }
 }
