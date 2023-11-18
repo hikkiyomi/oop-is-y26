@@ -12,7 +12,10 @@ public class ConfigParser
     {
         if (!File.Exists(path))
         {
-            throw new ConfigException($"File {path} does not exist.");
+            _env["file"] = "-";
+            _env["directory"] = "#";
+
+            return;
         }
 
         using (var reader = new StreamReader(path))
