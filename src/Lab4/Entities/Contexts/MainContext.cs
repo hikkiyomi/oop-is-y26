@@ -1,4 +1,3 @@
-using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.TreeComponents;
 using Itmo.ObjectOrientedProgramming.Lab4.Extensions;
@@ -17,11 +16,6 @@ public class MainContext
         if (!currentPath.IsAbsolute())
         {
             throw new PathException("Connection path should be absolute.");
-        }
-
-        if (!Directory.Exists(currentPath))
-        {
-            throw new PathException($"There is no directory in given path {currentPath}.");
         }
     }
 
