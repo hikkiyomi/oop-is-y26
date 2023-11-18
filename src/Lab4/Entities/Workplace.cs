@@ -4,7 +4,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Entities;
 
 public class Workplace
 {
-    private IWorkplaceState _state = new DisconnectedWorkplace();
+    private IWorkplaceState _state;
+
+    public Workplace()
+    {
+        _state = new DisconnectedWorkplace(this);
+    }
 
     public void ChangeState(IWorkplaceState newState)
     {

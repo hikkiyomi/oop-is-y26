@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Builders;
+using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
 
@@ -12,7 +13,7 @@ public class DisconnectedWorkplace : IWorkplaceState
         _workplace = workplace;
     }
 
-    public void AddCommand(ICommandBuilder commandBuilder)
+    public void AddCommand(ICommandParameterBuilder commandParameterBuilder)
     {
         throw new System.NotImplementedException();
     }

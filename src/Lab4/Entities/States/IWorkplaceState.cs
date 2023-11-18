@@ -4,6 +4,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
 
 public interface IWorkplaceState
 {
-    void AddCommand(ICommandBuilder commandBuilder);
+    void AddCommand(ICommandParameterBuilder commandParameterBuilder);
     void Execute(string command);
 }
