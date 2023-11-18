@@ -25,6 +25,7 @@ public abstract class ParserChainLinkBase : IParserChainLink
         ref Collection<string> positionals,
         string[] args,
         int currentArgument);
+
     public abstract IParserChainLink Clone();
 
     public bool Equals(ParserChainLinkBase other)

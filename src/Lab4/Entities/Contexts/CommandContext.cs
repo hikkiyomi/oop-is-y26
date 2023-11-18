@@ -113,14 +113,16 @@ public class CommandContext
             var chainMainSignature = new ParserChain(_mainSignature);
             var chainActionSignature = new ParserChain(_actionSignature);
             var chainParameters = new ParserChain(string.Empty);
-
-            chainMainSignature.AddNext(_actionSignature, chainActionSignature);
-            chainActionSignature.AddNext(string.Empty, chainParameters);
+            IParserChainLink copyChainParameters = chainParameters.Clone();
 
             foreach (ParameterContext param in _parameters)
             {
-                chainParameters.AddNext(param.FullName, chainParameters);
+                chainParameters.AddNext(param.FullName, copyChainParameters);
             }
+
+            copyChainParameters.AddNext(string.Empty, chainParameters);
+            chainActionSignature.AddNext(string.Empty, copyChainParameters);
+            chainMainSignature.AddNext(_actionSignature, chainActionSignature);
 
             return new CommandContext(
                 new CommandIdentifier(_mainSignature, _actionSignature),

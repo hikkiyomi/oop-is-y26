@@ -44,13 +44,13 @@ public class ArgumentBuilder : IArgumentBuilder
             throw new ArgumentBuilderException("Main signature should not be null.");
         }
 
-        if (_actionSignature is null)
+        if (_actionSignature is null && _mainSignature != "connect" && _mainSignature != "disconnect")
         {
             throw new ArgumentBuilderException("Action signature should not be null.");
         }
 
         return new ArgumentContext(
-            new CommandIdentifier(_mainSignature, _actionSignature),
+            new CommandIdentifier(_mainSignature, _actionSignature ?? string.Empty),
             _parameters);
     }
 }

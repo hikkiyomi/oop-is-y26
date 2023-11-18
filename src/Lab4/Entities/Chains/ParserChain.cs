@@ -30,70 +30,53 @@ public class ParserChain : ParserChainLinkBase
         var checker = new ArgumentTypeChecker();
         ArgumentType type = checker.Check(args[currentArgument]);
 
-        if (currentArgument == 0)
+        if (type == ArgumentType.Positional)
         {
-            if (type != ArgumentType.Positional)
+            if (args[0].Equals(Go(args[0])?.Name, StringComparison.Ordinal))
             {
-                throw new ParserContextException("First argument should be main signature.");
+                builder.SetMainSignature(args[0]);
+                Go(args[0])?.Handle(ref builder, ref positionals, args, 1);
             }
-
-            builder.SetMainSignature(args[0]);
-
-            if (args[0].Equals("disconnect", StringComparison.Ordinal))
+            else if (args[1].Equals(Go(args[1])?.Name, StringComparison.Ordinal))
             {
-                builder.SetActionSignature(string.Empty);
-                return;
-            }
-
-            Go(args[0]).Handle(ref builder, ref positionals, args, 1);
-        }
-        else if (currentArgument == 1)
-        {
-            if (type != ArgumentType.Positional)
-            {
-                throw new ParserContextException("Second argument should be action signature.");
-            }
-
-            builder.SetActionSignature(args[1]);
-            Go(args[1]).Go(string.Empty).Handle(ref builder, ref positionals, args, currentArgument + 1);
-        }
-        else
-        {
-            if (type == ArgumentType.Positional)
-            {
-                positionals.Add(args[currentArgument]);
-                Handle(ref builder, ref positionals, args, currentArgument + 1);
-
-                return;
-            }
-
-            string key;
-            string value;
-            int goFrom;
-
-            if (type == ArgumentType.MonoParameter)
-            {
-                MonoParameterResult result = MonoParameterParser.Parse(args[currentArgument]);
-                key = result.Key.Split('-', StringSplitOptions.RemoveEmptyEntries)[0];
-                value = result.Value;
-                goFrom = currentArgument + 1;
+                builder.SetActionSignature(args[1]);
+                Go(args[1])?.Go(string.Empty)?.Handle(ref builder, ref positionals, args, currentArgument + 1);
             }
             else
             {
-                key = args[currentArgument].Split('-', StringSplitOptions.RemoveEmptyEntries)[0];
-
-                if (currentArgument + 1 >= args.Length)
-                {
-                    throw new ParserContextException("Not every argument has its own value.");
-                }
-
-                value = args[currentArgument + 1];
-                goFrom = currentArgument + 2;
+                positionals.Add(args[currentArgument]);
+                Handle(ref builder, ref positionals, args, currentArgument + 1);
             }
 
-            builder.AddParameterValue(key, value);
-            Go(key).Handle(ref builder, ref positionals, args, goFrom);
+            return;
         }
+
+        string key;
+        string value;
+        int goFrom;
+
+        if (type == ArgumentType.MonoParameter)
+        {
+            MonoParameterResult result = MonoParameterParser.Parse(args[currentArgument]);
+            key = result.Key.Split('-', StringSplitOptions.RemoveEmptyEntries)[0];
+            value = result.Value;
+            goFrom = currentArgument + 1;
+        }
+        else
+        {
+            key = args[currentArgument].Split('-', StringSplitOptions.RemoveEmptyEntries)[0];
+
+            if (currentArgument + 1 >= args.Length)
+            {
+                throw new ParserContextException("Not every argument has its own value.");
+            }
+
+            value = args[currentArgument + 1];
+            goFrom = currentArgument + 2;
+        }
+
+        builder.AddParameterValue(key, value);
+        Go(key)?.Handle(ref builder, ref positionals, args, goFrom);
     }
 
     public override IParserChainLink Clone()
@@ -106,10 +89,10 @@ public class ParserChain : ParserChainLinkBase
         };
     }
 
-    private ParserChain Go(string transition)
+    private ParserChain? Go(string transition)
     {
         return Transitions.TryGetValue(transition, out IParserChainLink? value)
             ? (ParserChain)value
-            : throw new TransitionException($"No such transition as {transition}.");
+            : null;
     }
 }

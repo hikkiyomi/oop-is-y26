@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.FileSystems;
@@ -18,9 +18,9 @@ public class DisconnectedWorkplace : IWorkplaceState
         _parser.AddCommand(CommandContext.Builder
             .SetMainSignature("connect")
             .SetActionSignature(string.Empty)
+            .AddParameter("m", "mode")
             .SetAction(delegate(object[] objects)
             {
-                var dict = (Dictionary<string, string>)objects[0];
                 string[] positionals = (string[])objects[1];
                 _workplace.ChangeState(
                     new ConnectedWorkplace(
@@ -39,6 +39,7 @@ public class DisconnectedWorkplace : IWorkplaceState
 
     public void Execute(string command)
     {
-        throw new System.NotImplementedException();
+        Action action = _parser.Parse(command);
+        action.Invoke();
     }
 }
