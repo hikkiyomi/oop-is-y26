@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
-using Itmo.ObjectOrientedProgramming.Lab4.Services.OutputModes;
+using Itmo.ObjectOrientedProgramming.Lab4.Entities.Factories;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
@@ -55,8 +55,11 @@ public class ConnectedWorkplace : IWorkplaceState
             .AddParameter("m", "mode")
             .SetAction(delegate(object[] objects)
             {
+                var dict = (Dictionary<string, string>)objects[0];
                 string[] positionals = (string[])objects[1];
-                Context.FileSystem.Show(positionals[0], new ConsoleMode());
+                OutputModeFactory factory = new();
+
+                Context.FileSystem.Show(positionals[0], factory.Create(dict["mode"]));
             })
             .Build());
 

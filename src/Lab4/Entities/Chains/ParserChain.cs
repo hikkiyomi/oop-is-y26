@@ -36,7 +36,7 @@ public class ParserChain : ParserChainLinkBase
                 builder.SetMainSignature(args[0]);
                 Go(args[0])?.Handle(ref builder, ref positionals, args, 1);
             }
-            else if (args[1].Equals(Go(args[1])?.Name, StringComparison.Ordinal))
+            else if (args.Length > 1 && args[1].Equals(Go(args[1])?.Name, StringComparison.Ordinal))
             {
                 builder.SetActionSignature(args[1]);
 

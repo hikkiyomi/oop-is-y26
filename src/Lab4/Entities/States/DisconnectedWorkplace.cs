@@ -1,7 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
-using Itmo.ObjectOrientedProgramming.Lab4.Services.FileSystems;
+using Itmo.ObjectOrientedProgramming.Lab4.Entities.Factories;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
@@ -21,13 +22,15 @@ public class DisconnectedWorkplace : IWorkplaceState
             .AddParameter("m", "mode")
             .SetAction(delegate(object[] objects)
             {
+                var dict = (Dictionary<string, string>)objects[0];
                 string[] positionals = (string[])objects[1];
+                FileSystemFactory factory = new();
 
                 _workplace.ChangeState(
                     new ConnectedWorkplace(
                         _workplace,
                         new MainContext(
-                            new LocalFileSystem(),
+                            factory.Create(dict["mode"]),
                             positionals[0])));
             })
             .Build());
