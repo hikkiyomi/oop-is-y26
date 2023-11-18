@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Factories;
+using Itmo.ObjectOrientedProgramming.Lab4.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
@@ -26,12 +27,17 @@ public class DisconnectedWorkplace : IWorkplaceState
                 string[] positionals = (string[])objects[1];
                 FileSystemFactory factory = new();
 
+                if (!positionals[0].IsAbsolute())
+                {
+                    throw new PathException("Connection path should be absolute.");
+                }
+
                 _workplace.ChangeState(
                     new ConnectedWorkplace(
                         _workplace,
                         new MainContext(
-                            factory.Create(dict["mode"]),
-                            positionals[0])));
+                            fileSystem: factory.Create(dict["mode"]),
+                            currentPath: positionals[0])));
             })
             .Build());
     }

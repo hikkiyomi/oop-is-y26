@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Factories;
+using Itmo.ObjectOrientedProgramming.Lab4.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.Services.Parsers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.States;
@@ -18,6 +19,8 @@ public class ConnectedWorkplace : IWorkplaceState
     {
         _workplace = workplace;
         Context = context;
+
+        var pathCombiner = new ContextPathCombiner(context);
 
         AddCommand(CommandContext.Builder
             .SetMainSignature("disconnect")
@@ -35,7 +38,7 @@ public class ConnectedWorkplace : IWorkplaceState
             {
                 string[] positionals = (string[])objects[1];
 
-                Context.CurrentPath = positionals[0];
+                Context.CurrentPath = pathCombiner.Combine(positionals[0]);
             })
             .Build());
 
@@ -61,7 +64,9 @@ public class ConnectedWorkplace : IWorkplaceState
                 string[] positionals = (string[])objects[1];
                 OutputModeFactory factory = new();
 
-                Context.FileSystem.Show(positionals[0], factory.Create(dict["mode"]));
+                Context.FileSystem.Show(
+                    path: pathCombiner.Combine(positionals[0]),
+                    mode: factory.Create(dict["mode"]));
             })
             .Build());
 
@@ -72,7 +77,9 @@ public class ConnectedWorkplace : IWorkplaceState
             {
                 string[] positionals = (string[])objects[1];
 
-                Context.FileSystem.Move(positionals[0], positionals[1]);
+                Context.FileSystem.Move(
+                    sourcePath: pathCombiner.Combine(positionals[0]),
+                    destinationPath: pathCombiner.Combine(positionals[1]));
             })
             .Build());
 
@@ -83,7 +90,9 @@ public class ConnectedWorkplace : IWorkplaceState
             {
                 string[] positionals = (string[])objects[1];
 
-                Context.FileSystem.Copy(positionals[0], positionals[1]);
+                Context.FileSystem.Copy(
+                    sourcePath: pathCombiner.Combine(positionals[0]),
+                    destinationPath: pathCombiner.Combine(positionals[1]));
             })
             .Build());
 
@@ -94,7 +103,7 @@ public class ConnectedWorkplace : IWorkplaceState
             {
                 string[] positionals = (string[])objects[1];
 
-                Context.FileSystem.Delete(positionals[0]);
+                Context.FileSystem.Delete(path: pathCombiner.Combine(positionals[0]));
             })
             .Build());
 
@@ -105,11 +114,15 @@ public class ConnectedWorkplace : IWorkplaceState
             {
                 string[] positionals = (string[])objects[1];
 
-                Context.FileSystem.Rename(positionals[0], positionals[1]);
+                Context.FileSystem.Rename(
+                    path: pathCombiner.Combine(positionals[0]),
+                    name: positionals[1]);
             })
             .Build());
     }
 
+    // Тут стоит геттер, потому что в парсер можно добавлять новые команды снаружи этого класса.
+    // Если геттера не будет, то юзер не будет знать о контексте - соответственно, не сможет создавать новые команды.
     public MainContext Context { get; }
 
     public void AddCommand(CommandContext context)
