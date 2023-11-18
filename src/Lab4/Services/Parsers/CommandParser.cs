@@ -28,9 +28,9 @@ public class CommandParser
         AddChain(_root, context.Chain);
     }
 
-    public Action Parse(string arguments)
+    public ParseInfoDto FullParse(string command)
     {
-        string[] split = arguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        string[] split = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var argumentBuilder = new ArgumentBuilder();
 
         _root.Handle(ref argumentBuilder, ref _positionals, split, 0);
@@ -48,7 +48,7 @@ public class CommandParser
                      .Parameters
                      .Keys
                      .Where(param => existingContext
-                                 .FindParameterByName(param) is null))
+                         .FindParameterByName(param) is null))
         {
             throw new ParserContextException($"Unknown parameter {param}");
         }
@@ -60,15 +60,24 @@ public class CommandParser
                     item => existingContext.GetParameterFullName(item.Key),
                     item => item.Value);
 
-        return () =>
-        {
-            existingContext.Action.Invoke(
-                new object[]
-                {
-                    contextByFullName,
-                    _positionals.ToArray(),
-                });
-        };
+        return new ParseInfoDto(
+            Id: parsedContext.Id,
+            Context: contextByFullName,
+            OriginalCommand: existingContext.Action,
+            CommandToInvoke: () =>
+            {
+                existingContext.Action.Invoke(
+                    new object[]
+                    {
+                        contextByFullName,
+                        _positionals.ToArray(),
+                    });
+            });
+    }
+
+    public Action Parse(string command)
+    {
+        return FullParse(command).CommandToInvoke;
     }
 
     // Пометил статикой, потому что метод не использует информацию из класса.
