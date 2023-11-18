@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Common.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Entities.Builders;
@@ -10,6 +11,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Entities.Contexts;
 
 public class CommandContext
 {
+    private readonly Dictionary<string, string> _fullNameByShortName = new();
     private readonly Dictionary<string, ParameterContext> _contextByFullName;
 
     private CommandContext(
@@ -28,6 +30,15 @@ public class CommandContext
             .ToDictionary(
                 dto => dto.FullName,
                 dto => dto);
+
+        foreach (ParameterContext dto in transferObjects
+                     .Where(dto => dto.ShortName is not null))
+        {
+            // Анализатор заставил меня написать эту строчку.
+            // А как по-другому?)
+            Debug.Assert(dto.ShortName is not null, "dto.ShortName is not null");
+            _fullNameByShortName.Add(dto.ShortName, dto.FullName);
+        }
     }
 
     public static ICommandMainSignatureBuilder Builder => new CommandContextBuilder();
@@ -35,11 +46,46 @@ public class CommandContext
     public Action<object[]> Action { get; }
     public ParserChain Chain { get; }
 
+    public string GetParameterFullName(string name)
+    {
+        return _fullNameByShortName.TryGetValue(name, out string? value)
+            ? value
+            : name;
+    }
+
+    public ParameterContext? FindParameterByName(string name)
+    {
+        ParameterContext? byFullName = FindParameterByFullName(name);
+        ParameterContext? byShortName = FindParameterByShortName(name);
+
+        if (byFullName is null && byShortName is null)
+        {
+            return null;
+        }
+
+        return byFullName ?? byShortName;
+    }
+
     public ParameterContext? FindParameterByFullName(string fullName)
     {
         return _contextByFullName.TryGetValue(fullName, out ParameterContext? value)
             ? value
             : null;
+    }
+
+    private ParameterContext? FindParameterByShortName(string shortName)
+    {
+        if (shortName.Length != 1)
+        {
+            throw new CommandContextException("Short name should be 2 in length.");
+        }
+
+        if (!_fullNameByShortName.TryGetValue(shortName, out string? value))
+        {
+            throw new CommandContextException($"No such short name as {shortName}");
+        }
+
+        return FindParameterByFullName(value);
     }
 
     private class CommandContextBuilder

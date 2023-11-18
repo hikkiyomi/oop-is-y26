@@ -48,17 +48,24 @@ public class Parser
                      .Parameters
                      .Keys
                      .Where(param => existingContext
-                                 .FindParameterByFullName(param) is null))
+                                 .FindParameterByName(param) is null))
         {
             throw new ParserContextException($"Unknown parameter {param}");
         }
+
+        var contextByFullName
+            = parsedContext
+                .Parameters
+                .ToDictionary(
+                    item => existingContext.GetParameterFullName(item.Key),
+                    item => item.Value);
 
         return () =>
         {
             existingContext.Action.Invoke(
                 new object[]
                 {
-                    parsedContext.Parameters,
+                    contextByFullName,
                     _positionals.ToArray(),
                 });
         };
