@@ -1,6 +1,8 @@
 using Lab5.Application.Abstractions.Repositories;
 using Lab5.Application.Contracts.Accounts;
+using Lab5.Application.Contracts.Exceptions;
 using Lab5.Application.Contracts.Users;
+using Lab5.Application.Models;
 using Lab5.Application.Models.Operations;
 
 namespace Lab5.Application.Accounts;
@@ -44,6 +46,43 @@ public class AccountService : IAccountService
             OperationResult.Success);
 
         return new CreateAccountResult.Success();
+    }
+
+    public AccountLoginResult Login(string number, string pin)
+    {
+        if (_userHandler.User is null)
+        {
+            throw new AccountException(
+                "Trying to log into account with non-existing user");
+        }
+
+        Task<BankAccount?> task
+            = _accountRepository.FindAccountByUsernameAndNumber(
+                _userHandler.User.Username,
+                number);
+
+        BankAccount? account = task.Result;
+
+        if (account is null)
+        {
+            LogOperation(
+                username: _userHandler.User.Username,
+                activity: "Account log in",
+                account: number,
+                result: OperationResult.Failure);
+
+            return new AccountLoginResult.Failure();
+        }
+
+        LogOperation(
+            username: _userHandler.User.Username,
+            activity: "Account log in",
+            account: number,
+            result: OperationResult.Success);
+
+        _accountHandler.Account = account;
+
+        return new AccountLoginResult.Success();
     }
 
     private void LogOperation(

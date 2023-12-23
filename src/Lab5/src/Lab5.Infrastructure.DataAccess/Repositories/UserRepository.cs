@@ -51,6 +51,9 @@ public class UserRepository : IUserRepository
                 .ConfigureAwait(false);
 
         using var command = new NpgsqlCommand(query, connection);
+
+        command.Parameters.AddWithValue("username", username);
+
         using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         return await reader.ReadAsync().ConfigureAwait(false)
