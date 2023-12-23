@@ -1,7 +1,7 @@
 using Lab5.Application.Contracts.Users;
 using Spectre.Console;
 
-namespace Lab5.Presentation.Console.Scenarios.ModeSelectings.User;
+namespace Lab5.Presentation.Console.Scenarios.ModeSelecting.User;
 
 public class UserSelectScenario : IScenario
 {

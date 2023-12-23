@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Lab5.Application.Contracts.Users;
 
-namespace Lab5.Presentation.Console.Scenarios.ModeSelectings.Admin;
+namespace Lab5.Presentation.Console.Scenarios.ModeSelecting.Admin;
 
 public class AdminSelectScenarioProvider : IScenarioProvider
 {

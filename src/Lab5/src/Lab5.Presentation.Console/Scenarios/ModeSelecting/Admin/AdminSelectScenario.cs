@@ -1,7 +1,7 @@
 using Lab5.Application.Contracts.Users;
 using Spectre.Console;
 
-namespace Lab5.Presentation.Console.Scenarios.ModeSelectings.Admin;
+namespace Lab5.Presentation.Console.Scenarios.ModeSelecting.Admin;
 
 public class AdminSelectScenario : IScenario
 {

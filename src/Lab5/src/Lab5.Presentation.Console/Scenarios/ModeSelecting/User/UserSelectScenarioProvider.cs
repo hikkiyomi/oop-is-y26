@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Lab5.Application.Contracts.Users;
 
-namespace Lab5.Presentation.Console.Scenarios.ModeSelectings.User;
+namespace Lab5.Presentation.Console.Scenarios.ModeSelecting.User;
 
 public class UserSelectScenarioProvider : IScenarioProvider
 {
