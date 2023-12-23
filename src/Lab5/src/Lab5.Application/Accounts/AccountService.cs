@@ -85,6 +85,17 @@ public class AccountService : IAccountService
         return new AccountLoginResult.Success();
     }
 
+    public int GetBalance()
+    {
+        if (_accountHandler.Account is null)
+        {
+            throw new AccountException(
+                "Trying to get balance of non-existing account");
+        }
+
+        return _accountHandler.Account.Balance;
+    }
+
     private void LogOperation(
         string username,
         string activity,
