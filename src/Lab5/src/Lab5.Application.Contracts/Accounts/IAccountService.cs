@@ -11,4 +11,6 @@ public interface IAccountService
     DepositResult Deposit(int deposit);
 
     WithdrawResult Withdraw(int withdraw);
+
+    void Logout();
 }

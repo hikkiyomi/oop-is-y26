@@ -175,6 +175,17 @@ public class AccountService : IAccountService
         return new WithdrawResult.Success();
     }
 
+    public void Logout()
+    {
+        if (_accountHandler.Account is null)
+        {
+            throw new AccountException(
+                "Trying to log out from non-existing account");
+        }
+
+        _accountHandler.Account = null;
+    }
+
     private void LogOperation(
         string username,
         string activity,
