@@ -56,7 +56,8 @@ public class UserRepository : IUserRepository
         return await reader.ReadAsync().ConfigureAwait(false)
             ? new User(
                 Username: reader.GetString(1),
-                AdminPassword: reader.GetString(2))
+                AdminPassword: reader.GetString(2),
+                Mode: null)
             : null;
     }
 }

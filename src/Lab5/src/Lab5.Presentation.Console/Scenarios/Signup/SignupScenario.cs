@@ -14,6 +14,7 @@ public class SignupScenario : IScenario
     }
 
     public string Name => "Sign up";
+
     public void Run()
     {
         string username = AnsiConsole.Ask<string>("Enter username: ");

@@ -14,6 +14,7 @@ public class LoginScenario : IScenario
     }
 
     public string Name => "Log in";
+
     public void Run()
     {
         string username = AnsiConsole.Ask<string>("Enter username: ");
