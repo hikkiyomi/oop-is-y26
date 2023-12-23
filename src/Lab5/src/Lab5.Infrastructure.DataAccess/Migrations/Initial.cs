@@ -29,10 +29,21 @@ public class Initial : SqlMigration
             account_id TEXT NOT NULL,
             operation_result OperationResult NOT NULL
         );
+        
+        CREATE TABLE BankAccount
+        (
+            id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+            user_name TEXT NOT NULL,
+            number TEXT NOT NULL,
+            pin TEXT NOT NULL,
+            balance BIGINT NOT NULL
+        );
         """;
 
     protected override string GetDownSql(IServiceProvider serviceProvider) =>
         """
         DROP TABLE Users;
+        DROP TABLE OperationHistory;
+        DROP TABLE BankAccount;
         """;
 }

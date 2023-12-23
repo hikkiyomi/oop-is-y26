@@ -31,7 +31,7 @@ public class UserService : IUserService
             username: username,
             activity: "Sign up",
             account: string.Empty,
-            result: new OperationResult.Success());
+            result: OperationResult.Success);
 
         return new SignupResult.Success();
     }
@@ -47,7 +47,7 @@ public class UserService : IUserService
                 username: username,
                 activity: "Log in",
                 account: string.Empty,
-                result: new OperationResult.Failure());
+                result: OperationResult.Failure);
 
             return new LoginResult.Failure();
         }
@@ -56,7 +56,7 @@ public class UserService : IUserService
             username: username,
             activity: "Log in",
             account: string.Empty,
-            result: new OperationResult.Success());
+            result: OperationResult.Success);
 
         _userHandler.User = user;
 

@@ -15,8 +15,4 @@
       <ProjectReference Include="..\Lab5.Application.Contracts\Lab5.Application.Contracts.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Scenarios\Balance\" />
-    </ItemGroup>
-
 </Project>
