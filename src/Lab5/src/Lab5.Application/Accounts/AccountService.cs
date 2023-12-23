@@ -96,6 +96,40 @@ public class AccountService : IAccountService
         return _accountHandler.Account.Balance;
     }
 
+    public DepositResult Deposit(int deposit)
+    {
+        if (_userHandler.User is null)
+        {
+            throw new AccountException(
+                "Trying to deposit into account of non-existing user");
+        }
+
+        if (_accountHandler.Account is null)
+        {
+            throw new AccountException(
+                "Trying to deposit into non-existing account");
+        }
+
+        _accountHandler.Account = _accountHandler.Account with
+        {
+            Balance = _accountHandler.Account.Balance + deposit,
+        };
+
+        _accountRepository.ChangeBalance(
+                _userHandler.User.Username,
+                _accountHandler.Account.Number,
+                _accountHandler.Account.Balance)
+            .GetAwaiter().GetResult();
+
+        LogOperation(
+            username: _userHandler.User.Username,
+            activity: $"Deposit: {deposit}. New balance: {_accountHandler.Account.Balance}",
+            account: _accountHandler.Account.Number,
+            OperationResult.Success);
+
+        return new DepositResult.Success();
+    }
+
     private void LogOperation(
         string username,
         string activity,

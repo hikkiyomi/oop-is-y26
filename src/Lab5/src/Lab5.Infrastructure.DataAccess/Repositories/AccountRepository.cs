@@ -68,4 +68,26 @@ public class AccountRepository : IAccountRepository
                 Balance: reader.GetInt32(3))
             : null;
     }
+
+    public async Task ChangeBalance(string username, string number, int newBalance)
+    {
+        const string query = """
+                             UPDATE BankAccount
+                             SET balance = :balance
+                             WHERE user_name = :user_name AND number = :number;
+                             """;
+
+        NpgsqlConnection connection
+            = await _connectionProvider
+                .GetConnectionAsync(default)
+                .ConfigureAwait(false);
+
+        using var command = new NpgsqlCommand(query, connection);
+
+        command.Parameters.AddWithValue("user_name", username);
+        command.Parameters.AddWithValue("number", number);
+        command.Parameters.AddWithValue("balance", newBalance);
+
+        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+    }
 }

@@ -7,4 +7,6 @@ public interface IAccountService
     AccountLoginResult Login(string number, string pin);
 
     int GetBalance();
+
+    DepositResult Deposit(int deposit);
 }
