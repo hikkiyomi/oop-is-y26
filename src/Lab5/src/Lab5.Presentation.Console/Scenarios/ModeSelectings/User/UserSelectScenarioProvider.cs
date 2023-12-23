@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Lab5.Application.Contracts.Users;
-using Lab5.Application.Models;
 
 namespace Lab5.Presentation.Console.Scenarios.ModeSelectings.User;
 
@@ -20,7 +19,7 @@ public class UserSelectScenarioProvider : IScenarioProvider
     public bool TryGetScenario(
         [NotNullWhen(true)] out IScenario? scenario)
     {
-        if (_userHandler.User is null || _userHandler.User.Mode == Mode.User)
+        if (_userHandler.User is null || _userHandler.User.Mode is not null)
         {
             scenario = null;
 
