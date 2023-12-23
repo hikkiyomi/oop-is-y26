@@ -91,6 +91,16 @@ public class UserService : IUserService
         _userHandler.User = _userHandler.User with { Mode = Mode.Admin };
     }
 
+    public IReadOnlyCollection<Operation> FetchOperationHistory()
+    {
+        if (_userHandler.User is null)
+        {
+            return new List<Operation>().AsReadOnly();
+        }
+
+        return _operationRepository.Fetch(_userHandler.User.Username).Result;
+    }
+
     private void LogOperation(
         string username,
         string activity,

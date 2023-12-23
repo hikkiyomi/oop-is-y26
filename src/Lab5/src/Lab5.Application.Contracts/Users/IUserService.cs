@@ -1,3 +1,5 @@
+using Lab5.Application.Models.Operations;
+
 namespace Lab5.Application.Contracts.Users;
 
 public interface IUserService
@@ -9,4 +11,6 @@ public interface IUserService
     void EnterUserMode();
 
     void EnterAdminMode(string providedPassword);
+
+    IReadOnlyCollection<Operation> FetchOperationHistory();
 }

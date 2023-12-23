@@ -9,4 +9,6 @@ public interface IOperationRepository
         string activity,
         string account,
         OperationResult result);
+
+    Task<IReadOnlyCollection<Operation>> Fetch(string username);
 }
