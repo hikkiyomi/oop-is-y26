@@ -25,7 +25,7 @@ public class CreateAccountScenarioProvider : IScenarioProvider
         [NotNullWhen(true)] out IScenario? scenario)
     {
         if (_userHandler.User is null
-            || _userHandler.User.Mode.Equals(Mode.User)
+            || !_userHandler.User.Mode.Equals(Mode.Admin)
             || _accountHandler.Account is not null)
         {
             scenario = null;

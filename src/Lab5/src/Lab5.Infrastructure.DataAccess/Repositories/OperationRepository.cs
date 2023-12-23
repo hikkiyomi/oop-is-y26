@@ -17,12 +17,11 @@ public class OperationRepository : IOperationRepository
     public async Task AddOperation(
         string username,
         string activity,
-        string account,
-        OperationResult result)
+        string account)
     {
         const string query = """
-                             INSERT INTO OperationHistory(user_name, activity, account_id, operation_result)
-                             VALUES (:user_name, :activity, :account_id, :operation_result);
+                             INSERT INTO OperationHistory(user_name, activity, account_id)
+                             VALUES (:user_name, :activity, :account_id);
                              """;
 
         NpgsqlConnection connection =
@@ -35,7 +34,6 @@ public class OperationRepository : IOperationRepository
         command.Parameters.AddWithValue("user_name", username);
         command.Parameters.AddWithValue("activity", activity);
         command.Parameters.AddWithValue("account_id", account);
-        command.Parameters.AddWithValue("operation_result", result);
 
         await command.ExecuteNonQueryAsync().ConfigureAwait(false);
     }
@@ -46,8 +44,7 @@ public class OperationRepository : IOperationRepository
                              SELECT
                                 user_name,
                                 activity,
-                                account_id,
-                                operation_result
+                                account_id
                              FROM OperationHistory
                              WHERE user_name = :user_name;
                              """;
@@ -69,8 +66,7 @@ public class OperationRepository : IOperationRepository
             operations.Add(new Operation(
                 Username: reader.GetString(0),
                 Activity: reader.GetString(1),
-                Account: reader.GetString(2),
-                Result: await reader.GetFieldValueAsync<OperationResult>(4).ConfigureAwait(false)));
+                Account: reader.GetString(2)));
         }
 
         return operations.AsReadOnly();

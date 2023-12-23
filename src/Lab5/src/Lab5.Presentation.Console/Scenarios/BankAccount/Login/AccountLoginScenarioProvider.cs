@@ -25,7 +25,7 @@ public class AccountLoginScenarioProvider : IScenarioProvider
         [NotNullWhen(true)] out IScenario? scenario)
     {
         if (_userHandler.User is null
-            || _accountHandler.Account is null
+            || _accountHandler.Account is not null
             || !_userHandler.User.Mode.Equals(Mode.User))
         {
             scenario = null;

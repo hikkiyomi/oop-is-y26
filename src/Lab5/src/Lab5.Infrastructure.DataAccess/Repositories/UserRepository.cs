@@ -38,7 +38,7 @@ public class UserRepository : IUserRepository
     {
         const string query = """
                              SELECT
-                                user_id,
+                                id,
                                 user_name,
                                 admin_password
                              FROM Users

@@ -21,5 +21,6 @@ public class AdminSelectScenario : IScenario
         _userService.EnterAdminMode(password);
 
         AnsiConsole.WriteLine("Successfully entered admin mode\n--------\n");
+        AnsiConsole.Ask<string>("Ok");
     }
 }

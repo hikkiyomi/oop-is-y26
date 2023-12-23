@@ -19,5 +19,6 @@ public class LogoutScenario : IScenario
         _userService.Logout();
 
         AnsiConsole.WriteLine("Successfully logged out\n--------\n");
+        AnsiConsole.Ask<string>("Ok");
     }
 }

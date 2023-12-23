@@ -30,8 +30,7 @@ public class UserService : IUserService
         LogOperation(
             username: username,
             activity: "Sign up",
-            account: string.Empty,
-            result: OperationResult.Success);
+            account: string.Empty);
 
         return new SignupResult.Success();
     }
@@ -43,20 +42,13 @@ public class UserService : IUserService
 
         if (user is null)
         {
-            LogOperation(
-                username: username,
-                activity: "Log in",
-                account: string.Empty,
-                result: OperationResult.Failure);
-
             return new LoginResult.Failure();
         }
 
         LogOperation(
             username: username,
             activity: "Log in",
-            account: string.Empty,
-            result: OperationResult.Success);
+            account: string.Empty);
 
         _userHandler.User = user;
 
@@ -109,19 +101,18 @@ public class UserService : IUserService
                 "Logging out from non-existing user");
         }
 
-        _userHandler.User = _userHandler.User with { Mode = null };
+        _userHandler.User = null;
     }
 
     private void LogOperation(
         string username,
         string activity,
-        string account,
-        OperationResult result)
+        string account)
     {
         _operationRepository.AddOperation(
             username,
             activity,
-            account,
-            result).GetAwaiter().GetResult();
+            account)
+            .GetAwaiter().GetResult();
     }
 }

@@ -8,12 +8,6 @@ public class Initial : SqlMigration
 {
     protected override string GetUpSql(IServiceProvider serviceProvider) =>
         """
-        CREATE TYPE OperationResult AS ENUM
-        (
-            'success',
-            'failure'
-        );
-
         CREATE TABLE Users
         (
             id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -26,8 +20,7 @@ public class Initial : SqlMigration
             id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
             user_name TEXT NOT NULL,
             activity TEXT NOT NULL,
-            account_id TEXT NOT NULL,
-            operation_result OperationResult NOT NULL
+            account_id TEXT NOT NULL
         );
         
         CREATE TABLE BankAccount

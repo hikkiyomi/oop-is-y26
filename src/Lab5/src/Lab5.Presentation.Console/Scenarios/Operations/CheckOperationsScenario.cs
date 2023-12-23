@@ -22,9 +22,10 @@ public class CheckOperationsScenario : IScenario
         foreach (Operation item in result)
         {
             AnsiConsole.WriteLine(
-                $"{item.Username} | {item.Activity} | {item.Account} | {item.Result}\n");
+                $"{item.Username} | {item.Activity} | {item.Account}\n");
         }
 
         AnsiConsole.WriteLine("--------\n");
+        AnsiConsole.Ask<string>("Ok");
     }
 }

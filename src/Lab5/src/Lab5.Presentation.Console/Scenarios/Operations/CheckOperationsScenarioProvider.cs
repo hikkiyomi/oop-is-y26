@@ -25,7 +25,6 @@ public class CheckOperationsScenarioProvider : IScenarioProvider
         [NotNullWhen(true)] out IScenario? scenario)
     {
         if (_userHandler.User is null
-            || _accountHandler.Account is null
             || !_userHandler.User.Mode.Equals(Mode.Admin))
         {
             scenario = null;

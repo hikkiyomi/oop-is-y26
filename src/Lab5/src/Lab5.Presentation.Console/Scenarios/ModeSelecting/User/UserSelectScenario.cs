@@ -19,5 +19,6 @@ public class UserSelectScenario : IScenario
         _userService.EnterUserMode();
 
         AnsiConsole.WriteLine("Successfully entered user mode\n--------\n");
+        AnsiConsole.Ask<string>("Ok");
     }
 }

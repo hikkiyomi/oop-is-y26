@@ -19,5 +19,6 @@ public class CheckBalanceScenario : IScenario
         int balance = _accountService.GetBalance();
 
         AnsiConsole.WriteLine($"Current account balance: {balance}\n--------\n");
+        AnsiConsole.Ask<string>("Ok");
     }
 }

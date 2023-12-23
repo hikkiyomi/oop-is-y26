@@ -30,5 +30,6 @@ public class SignupScenario : IScenario
         };
 
         AnsiConsole.WriteLine($"{message}\n--------\n");
+        AnsiConsole.Ask<string>("Ok");
     }
 }

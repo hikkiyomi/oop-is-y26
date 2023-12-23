@@ -3,7 +3,6 @@ using Lab5.Application.Contracts.Accounts;
 using Lab5.Application.Contracts.Exceptions;
 using Lab5.Application.Contracts.Users;
 using Lab5.Application.Models;
-using Lab5.Application.Models.Operations;
 
 namespace Lab5.Application.Accounts;
 
@@ -42,8 +41,7 @@ public class AccountService : IAccountService
         LogOperation(
             username: _userHandler.User.Username,
             activity: "Creating account",
-            account: number,
-            OperationResult.Success);
+            account: number);
 
         return new CreateAccountResult.Success();
     }
@@ -65,20 +63,13 @@ public class AccountService : IAccountService
 
         if (account is null)
         {
-            LogOperation(
-                username: _userHandler.User.Username,
-                activity: "Account log in",
-                account: number,
-                result: OperationResult.Failure);
-
             return new AccountLoginResult.Failure();
         }
 
         LogOperation(
             username: _userHandler.User.Username,
             activity: "Account log in",
-            account: number,
-            result: OperationResult.Success);
+            account: number);
 
         _accountHandler.Account = account;
 
@@ -124,8 +115,7 @@ public class AccountService : IAccountService
         LogOperation(
             username: _userHandler.User.Username,
             activity: $"Deposit: {deposit}. New balance: {_accountHandler.Account.Balance}",
-            account: _accountHandler.Account.Number,
-            OperationResult.Success);
+            account: _accountHandler.Account.Number);
 
         return new DepositResult.Success();
     }
@@ -146,18 +136,12 @@ public class AccountService : IAccountService
 
         if (_accountHandler.Account.Balance < withdraw)
         {
-            LogOperation(
-                username: _userHandler.User.Username,
-                activity: $"Withdrawal: {withdraw}",
-                account: _accountHandler.Account.Number,
-                OperationResult.Failure);
-
             return new WithdrawResult.Failure();
         }
 
         _accountHandler.Account = _accountHandler.Account with
         {
-            Balance = _accountHandler.Account.Balance + withdraw,
+            Balance = _accountHandler.Account.Balance - withdraw,
         };
 
         _accountRepository.ChangeBalance(
@@ -169,8 +153,7 @@ public class AccountService : IAccountService
         LogOperation(
             username: _userHandler.User.Username,
             activity: $"Withdrawal: {withdraw}. New balance: {_accountHandler.Account.Balance}",
-            account: _accountHandler.Account.Number,
-            OperationResult.Failure);
+            account: _accountHandler.Account.Number);
 
         return new WithdrawResult.Success();
     }
@@ -189,13 +172,12 @@ public class AccountService : IAccountService
     private void LogOperation(
         string username,
         string activity,
-        string account,
-        OperationResult result)
+        string account)
     {
         _operationRepository.AddOperation(
             username,
             activity,
-            account,
-            result).GetAwaiter().GetResult();
+            account)
+            .GetAwaiter().GetResult();
     }
 }

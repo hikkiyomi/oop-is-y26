@@ -7,8 +7,7 @@ public interface IOperationRepository
     Task AddOperation(
         string username,
         string activity,
-        string account,
-        OperationResult result);
+        string account);
 
     Task<IReadOnlyCollection<Operation>> Fetch(string username);
 }
