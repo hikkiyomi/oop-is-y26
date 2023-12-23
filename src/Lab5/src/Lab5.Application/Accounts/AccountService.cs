@@ -101,7 +101,7 @@ public class AccountService : IAccountService
         if (_userHandler.User is null)
         {
             throw new AccountException(
-                "Trying to deposit into account of non-existing user");
+                "Trying to deposit into an account of non-existing user");
         }
 
         if (_accountHandler.Account is null)
@@ -128,6 +128,51 @@ public class AccountService : IAccountService
             OperationResult.Success);
 
         return new DepositResult.Success();
+    }
+
+    public WithdrawResult Withdraw(int withdraw)
+    {
+        if (_userHandler.User is null)
+        {
+            throw new AccountException(
+                "Trying to withdraw from an account of non-existing user");
+        }
+
+        if (_accountHandler.Account is null)
+        {
+            throw new AccountException(
+                "Trying to withdraw from non-existing account");
+        }
+
+        if (_accountHandler.Account.Balance < withdraw)
+        {
+            LogOperation(
+                username: _userHandler.User.Username,
+                activity: $"Withdrawal: {withdraw}",
+                account: _accountHandler.Account.Number,
+                OperationResult.Failure);
+
+            return new WithdrawResult.Failure();
+        }
+
+        _accountHandler.Account = _accountHandler.Account with
+        {
+            Balance = _accountHandler.Account.Balance + withdraw,
+        };
+
+        _accountRepository.ChangeBalance(
+                _userHandler.User.Username,
+                _accountHandler.Account.Number,
+                _accountHandler.Account.Balance)
+            .GetAwaiter().GetResult();
+
+        LogOperation(
+            username: _userHandler.User.Username,
+            activity: $"Withdrawal: {withdraw}. New balance: {_accountHandler.Account.Balance}",
+            account: _accountHandler.Account.Number,
+            OperationResult.Failure);
+
+        return new WithdrawResult.Success();
     }
 
     private void LogOperation(

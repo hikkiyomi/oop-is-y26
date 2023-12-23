@@ -9,4 +9,6 @@ public interface IAccountService
     int GetBalance();
 
     DepositResult Deposit(int deposit);
+
+    WithdrawResult Withdraw(int withdraw);
 }
