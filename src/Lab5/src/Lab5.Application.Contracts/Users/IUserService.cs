@@ -13,4 +13,6 @@ public interface IUserService
     void EnterAdminMode(string providedPassword);
 
     IReadOnlyCollection<Operation> FetchOperationHistory();
+
+    void Logout();
 }

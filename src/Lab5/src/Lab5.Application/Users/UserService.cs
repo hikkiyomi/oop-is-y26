@@ -101,6 +101,17 @@ public class UserService : IUserService
         return _operationRepository.Fetch(_userHandler.User.Username).Result;
     }
 
+    public void Logout()
+    {
+        if (_userHandler.User is null)
+        {
+            throw new UserHandlerException(
+                "Logging out from non-existing user");
+        }
+
+        _userHandler.User = _userHandler.User with { Mode = null };
+    }
+
     private void LogOperation(
         string username,
         string activity,
